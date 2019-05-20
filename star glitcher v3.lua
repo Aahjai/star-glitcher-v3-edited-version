@@ -3433,7 +3433,7 @@ print([[Icons:
 ? = Spoilers
 * = Exclusivity
 ]])
-warn([[V 3.3 (ON PROGRESS) Update Log:
+warn([[V 3.4 (ON PROGRESS) Update Log:
 ! - Calamity's "Z" has changed
 ! - Starfall EX added.
 ! - Mayhem has DESTRUCTION mode, which is new.
