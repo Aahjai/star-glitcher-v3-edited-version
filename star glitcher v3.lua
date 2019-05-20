@@ -3446,7 +3446,8 @@ warn([[V 3.3 (ON PROGRESS) Update Log:
 ? - Corruption's "Z" will have animation sooner
 ! - Calamity's "X" is added, named Starfall
 * - Mayhem now has MAJOR exclusivity, so far its still wip and yet to be done.
-* - Catastrophe's "Z" coming soon, same as Calamity's "Z" but more powerful.]])
+* - Catastrophe's "Z" coming soon, same as Calamity's "Z" but more powerful
+NOTE FROM EDITOR:convert this script to require.]])
 
 plr = Player
 char = plr.Character
