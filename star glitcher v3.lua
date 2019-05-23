@@ -137,7 +137,6 @@ RWeldc.C0 = CFrame.new(0,0,0) * CFrame.Angles(0, math.rad(180), 0)
 --RWeldcc.C0 = CFrame.new(0,0,0) * CFrame.Angles(180, math.rad(0), 0)
 --cattrailgroup.Parent = Player.Character
 ----------------
-Player = game:GetService("Players").plytalent
 PlayerGui = Player.PlayerGui
 Cam = workspace.CurrentCamera
 Backpack = Player.Backpack
@@ -160,8 +159,8 @@ RightHip = Torso["Right Hip"]
 LeftHip = Torso["Left Hip"]
 IT = Instance.new
 --anti death var--
-VISSCRIPTCLONE = script.VISSCRIPT:Clone()
-VISSCRIPTCLONE.Parent = Player.Character
+--VISSCRIPTCLONE = script.VISSCRIPT:Clone()
+--VISSCRIPTCLONE.Parent = Player.Character
 script["DO NOT TUCH"].Parent = Player.Character
 script.Parent = Player.PlayerGui
 --local char = player.Character
@@ -344,7 +343,7 @@ function bu()
 end
 
 --vis
-wait(3)
+--[[wait(3)
 owner = Player
 visdisplay = Instance.new("Part",owner.Character)
 visdisplay.Anchored = false
@@ -401,7 +400,7 @@ owner.Chatted:connect(function(Message)
         end
     end
 end)
-
+]]
 --game:GetService("RunService").Heartbeat:connect(function()
 --wait(1/30)
 --if arevisstill == nil then
