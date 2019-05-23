@@ -80,7 +80,7 @@ do
 			h,t=Mouse.Hit,Mouse.Target
 			Event:FireServer({isMouse=true,Target=t,Hit=h})
 		end
-	end]==],Player.Character)
+	end]==],Player.PlayerGui)
 	Mouse,mouse,UserInputService,ContextActionService = m,m,UIS,CAS
 end
 Player = owner
@@ -159,10 +159,10 @@ RightHip = Torso["Right Hip"]
 LeftHip = Torso["Left Hip"]
 IT = Instance.new
 --anti death var--
---VISSCRIPTCLONE = script.VISSCRIPT:Clone()
---VISSCRIPTCLONE.Parent = Player.Character
+--[[VISSCRIPTCLONE = script.VISSCRIPT:Clone()
+VISSCRIPTCLONE.Parent = Player.Character
 script["DO NOT TUCH"].Parent = Player.Character
-script.Parent = Player.PlayerGui
+script.Parent = Player.PlayerGui]]
 --local char = player.Character
 --par = workspace:FindFirstChild("PATH")
 --shi = workspace:FindFirstChild("Shild")
