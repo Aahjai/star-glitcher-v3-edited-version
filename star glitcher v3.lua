@@ -160,9 +160,9 @@ LeftHip = Torso["Left Hip"]
 IT = Instance.new
 --anti death var--
 --[[VISSCRIPTCLONE = script.VISSCRIPT:Clone()
-VISSCRIPTCLONE.Parent = Player.Character
-script["DO NOT TUCH"].Parent = Player.Character
-script.Parent = Player.PlayerGui]]
+--VISSCRIPTCLONE.Parent = Player.Character
+--script["DO NOT TUCH"].Parent = Player.Character
+--script.Parent = Player.PlayerGui]]
 --local char = player.Character
 --par = workspace:FindFirstChild("PATH")
 --shi = workspace:FindFirstChild("Shild")
