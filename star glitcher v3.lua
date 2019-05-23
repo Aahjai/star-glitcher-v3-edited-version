@@ -1,146 +1,87 @@
-wait(3)
+-- This script has been converted to FE by iPxter
+
+
 if game:GetService("RunService"):IsClient() then error("Script must be server-side in order to work; use h/ and not hl/") end
-local Player,game,owner = owner,game
-local RealPlayer = Player
+local Player,Mouse,mouse,UserInputService,ContextActionService = owner
 do
-    print("FE Compatibility code by Mokiros")
-    local rp = RealPlayer
-    script.Parent = rp.Character
-   
-    --RemoteEvent for communicating
-    local Event = Instance.new("RemoteEvent")
-    Event.Name = "UserInput_Event"
- 
-    --Fake event to make stuff like Mouse.KeyDown work
-    local function fakeEvent()
-        local t = {_fakeEvent=true,Functions={},Connect=function(self,f)table.insert(self.Functions,f) end}
-        t.connect = t.Connect
-        return t
-    end
- 
-    --Creating fake input objects with fake variables
+	print("FE Compatibility code by Mokiros | Translated to FE by iPxter")
+	script.Parent = Player.Character
+
+	--RemoteEvent for communicating
+	local Event = Instance.new("RemoteEvent")
+	Event.Name = "UserInput_Event"
+
+	--Fake event to make stuff like Mouse.KeyDown work
+	local function fakeEvent()
+		local t = {_fakeEvent=true,Connect=function(self,f)self.Function=f end}
+		t.connect = t.Connect
+		return t
+	end
+
+	--Creating fake input objects with fake variables
     local m = {Target=nil,Hit=CFrame.new(),KeyUp=fakeEvent(),KeyDown=fakeEvent(),Button1Up=fakeEvent(),Button1Down=fakeEvent()}
-    local UIS = {InputBegan=fakeEvent(),InputEnded=fakeEvent()}
-    local CAS = {Actions={},BindAction=function(self,name,fun,touch,...)
-        CAS.Actions[name] = fun and {Name=name,Function=fun,Keys={...}} or nil
-    end}
-    --Merged 2 functions into one by checking amount of arguments
-    CAS.UnbindAction = CAS.BindAction
- 
-    --This function will trigger the events that have been :Connect()'ed
-    local function te(self,ev,...)
-        local t = m[ev]
-        if t and t._fakeEvent then
-            for _,f in pairs(t.Functions) do
-                f(...)
-            end
-        end
-    end
-    m.TrigEvent = te
-    UIS.TrigEvent = te
- 
-    Event.OnServerEvent:Connect(function(plr,io)
-        if plr~=rp then return end
-        m.Target = io.Target
-        m.Hit = io.Hit
-        if not io.isMouse then
-            local b = io.UserInputState == Enum.UserInputState.Begin
-            if io.UserInputType == Enum.UserInputType.MouseButton1 then
-                return m:TrigEvent(b and "Button1Down" or "Button1Up")
-            end
-            for _,t in pairs(CAS.Actions) do
-                for _,k in pairs(t.Keys) do
-                    if k==io.KeyCode then
-                        t.Function(t.Name,io.UserInputState,io)
-                    end
-                end
-            end
-            m:TrigEvent(b and "KeyDown" or "KeyUp",io.KeyCode.Name:lower())
-            UIS:TrigEvent(b and "InputBegan" or "InputEnded",io,false)
-        end
-    end)
-    Event.Parent = NLS([==[
-    local Player = game:GetService("Players").LocalPlayer
-    local Event = script:WaitForChild("UserInput_Event")
- 
-    local Mouse = Player:GetMouse()
-    local UIS = game:GetService("UserInputService")
-    local input = function(io,a)
-        if a then return end
-        --Since InputObject is a client-side instance, we create and pass table instead
-        Event:FireServer({KeyCode=io.KeyCode,UserInputType=io.UserInputType,UserInputState=io.UserInputState,Hit=Mouse.Hit,Target=Mouse.Target})
-    end
-    UIS.InputBegan:Connect(input)
-    UIS.InputEnded:Connect(input)
- 
-    local h,t
-    --Give the server mouse data 30 times every second, but only if the values changed
-    --If player is not moving their mouse, client won't fire events
-    while wait(1/30) do
-        if h~=Mouse.Hit or t~=Mouse.Target then
-            h,t=Mouse.Hit,Mouse.Target
-            Event:FireServer({isMouse=true,Target=t,Hit=h})
-        end
-    end]==],Player.Character)
- 
-    ----Sandboxed game object that allows the usage of client-side methods and services
-    --Real game object
-    local _rg = game
- 
-    --Metatable for fake service
-    local fsmt = {
-        __index = function(self,k)
-            local s = rawget(self,"_RealService")
-            if s then return s[k] end
-        end,
-        __newindex = function(self,k,v)
-            local s = rawget(self,"_RealService")
-            if s then s[k]=v end
-        end,
-        __call = function(self,...)
-            local s = rawget(self,"_RealService")
-            if s then return s(...) end
-        end
-    }
-    local function FakeService(t,RealService)
-        t._RealService = typeof(RealService)=="string" and _rg:GetService(RealService) or RealService
-        return setmetatable(t,fsmt)
-    end
- 
-    --Fake game object
-    local g = {
-        GetService = function(self,s)
-            return self[s]
-        end,
-        Players = FakeService({
-            LocalPlayer = FakeService({GetMouse=function(self)return m end},Player)
-        },"Players"),
-        UserInputService = FakeService(UIS,"UserInputService"),
-        ContextActionService = FakeService(CAS,"ContextActionService"),
-    }
-    rawset(g.Players,"localPlayer",g.Players.LocalPlayer)
-    g.service = g.GetService
-   
-    g.RunService = FakeService({
-        RenderStepped = _rg:GetService("RunService").Heartbeat,
-        BindToRenderStep = function(self,name,_,fun)
- 
-        end,
-        UnbindFromRenderStep = function(self,name)
-            self._btrs[name]:Disconnect()
-        end,
-    },"RunService")
- 
-    setmetatable(g,{
-        __index=function(self,s)
-            return _rg:GetService(s) or typeof(_rg[s])=="function"
-            and function(_,...)return _rg[s](_rg,...)end or _rg[s]
-        end,
-        __newindex = fsmt.__newindex,
-        __call = fsmt.__call
-    })
-    --Changing owner to fake player object to support owner:GetMouse()
-    game,owner = g,g.Players.LocalPlayer
+	local UIS = {InputBegan=fakeEvent(),InputEnded=fakeEvent()}
+	local CAS = {Actions={},BindAction=function(self,name,fun,touch,...)
+		CAS.Actions[name] = fun and {Name=name,Function=fun,Keys={...}} or nil
+	end}
+	--Merged 2 functions into one by checking amount of arguments
+	CAS.UnbindAction = CAS.BindAction
+
+	--This function will trigger the events that have been :Connect()'ed
+	local function te(self,ev,...)
+		local t = m[ev]
+		if t and t._fakeEvent and t.Function then
+			t.Function(...)
+		end
+	end
+	m.TrigEvent = te
+	UIS.TrigEvent = te
+
+	Event.OnServerEvent:Connect(function(plr,io)
+	    if plr~=Player then return end
+		if io.isMouse then
+			m.Target = io.Target
+			m.Hit = io.Hit
+		else
+			local b = io.UserInputState == Enum.UserInputState.Begin
+			if io.UserInputType == Enum.UserInputType.MouseButton1 then
+				return m:TrigEvent(b and "Button1Down" or "Button1Up")
+			end
+			for _,t in pairs(CAS.Actions) do
+				for _,k in pairs(t.Keys) do
+					if k==io.KeyCode then
+						t.Function(t.Name,io.UserInputState,io)
+					end
+				end
+			end
+			m:TrigEvent(b and "KeyDown" or "KeyUp",io.KeyCode.Name:lower())
+			UIS:TrigEvent(b and "InputBegan" or "InputEnded",io,false)
+	    end
+	end)
+	Event.Parent = NLS([==[
+	local Player = game:GetService("Players").LocalPlayer
+	local Event = script:WaitForChild("UserInput_Event")
+
+	local UIS = game:GetService("UserInputService")
+	local input = function(io,a)
+		if a then return end
+		--Since InputObject is a client-side instance, we create and pass table instead
+		Event:FireServer({KeyCode=io.KeyCode,UserInputType=io.UserInputType,UserInputState=io.UserInputState})
+	end
+	UIS.InputBegan:Connect(input)
+	UIS.InputEnded:Connect(input)
+
+	local Mouse = Player:GetMouse()
+	local h,t
+	--Give the server mouse data 30 times every second, but only if the values changed
+	--If player is not moving their mouse, client won't fire events
+	while wait(1/30) do
+		if h~=Mouse.Hit or t~=Mouse.Target then
+			h,t=Mouse.Hit,Mouse.Target
+			Event:FireServer({isMouse=true,Target=t,Hit=h})
+		end
+	end]==],Player.Character)
+	Mouse,mouse,UserInputService,ContextActionService = m,m,UIS,CAS
 end
 Player = owner
 ---------Replace All "LocalPlayer" With Your Name.
@@ -150,11 +91,14 @@ Player = owner
 --local player = Player
 --model = Instance.new("Model",workspace)
 --Player.Character.Parent = model
+Character = Player.Character
 ---------------- skin & Undercover mode
 skinmode = false
 skinname = "NONE"
 Undercover = false
 --cat ear
+main_group = Instance.new("Model",Character)
+main_group.Name = "main_group"
 print("CREATE CAT EAR")
 cateargroup = Instance.new("Model",Character)
 cateargroup.Parent = Character
@@ -193,13 +137,14 @@ RWeldc.C0 = CFrame.new(0,0,0) * CFrame.Angles(0, math.rad(180), 0)
 --RWeldcc.C0 = CFrame.new(0,0,0) * CFrame.Angles(180, math.rad(0), 0)
 --cattrailgroup.Parent = Player.Character
 ----------------
+Player = game:GetService("Players").plytalent
 PlayerGui = Player.PlayerGui
 Cam = workspace.CurrentCamera
 Backpack = Player.Backpack
 Character = Player.Character
 Humanoid = Character.Humanoid
 animator = Humanoid.Animator
-Mouse = Player:GetMouse()
+--Mouse = Player:GetMouse()
 RootPart = Character["HumanoidRootPart"]
 Torso = Character["Torso"]
 Head = Character["Head"]
@@ -219,6 +164,74 @@ VISSCRIPTCLONE = script.VISSCRIPT:Clone()
 VISSCRIPTCLONE.Parent = Player.Character
 script["DO NOT TUCH"].Parent = Player.Character
 script.Parent = Player.PlayerGui
+--local char = player.Character
+--par = workspace:FindFirstChild("PATH")
+--shi = workspace:FindFirstChild("Shild")
+--weld =char:FindFirstChild("welded")
+--if par == nil then
+--para = Instance.new("Part",workspace)
+--para.Name = "PATH"
+--end
+--if shi == nil then
+--shie= Instance.new("Part",workspace)
+--shie.Name = "Shild"
+--shie.Transparency =0.9
+--shie.Size = Vector3.new(7,7,4)
+--shie.Anchored = false
+--shie.CanCollide = false
+--end
+--if weld == nil then
+--welde = Instance.new("Weld",char)
+--welde.Name = "welded"
+--welde.Part0 = char.Torso
+--welde.Part1 = shie
+--end
+--par = workspace:FindFirstChild("PATH")
+--shi = workspace:FindFirstChild("Shild")
+--weld =char:FindFirstChild("welded")
+----local mouse = player:GetMouse()
+--x = 0
+--y = 0
+--z = 0
+--function Shild()
+--    if workspace:FindFirstChild("Shild") == nil then
+--        shi = Instance.new("Part",workspace)
+--        shi.Name ="Shild"
+--        shi.Position = char.Torso.Position
+--        shi.Size = Vector3.new(7,7,4)
+--        weld = Instance.new("Weld",char)
+--        weld.Part0 = char.Torso
+--        weld.Part1 = shi
+--    elseif char:FindFirstChild("welded") then
+--        weld = Instance.new("Weld",char)
+--        weld.Name = "welded"
+--        weld.Part0 = char.Torso
+--        weld.Part1 = shi
+--    end
+--    shi.Transparency =0.9
+--    shi.Size = Vector3.new(7,7,4)
+--    weld.Part0 = char.Torso
+--    weld.Part1 = shi
+--end
+--function flypath()
+--    if workspace:FindFirstChild("PATH") ==nil then
+--        par = Instance.new("Part",workspace)
+--        par.Name ="PATH"
+--        par.Position = Vector3.new(char.Torso.Position.x,char.Torso.Position.y - 3.025+ y,char.Torso.Position.z)
+--        par.Anchored = true
+--        par.Size = Vector3.new(50,0.005,50)
+--        par.Transparency = 0.9
+--        par.Orientation = Vector3.new(char.Torso.Orientation.x, 0, char.Torso.Orientation.z)
+--    else
+--        par.Position = Vector3.new(char.Torso.Position.x + x,char.Torso.Position.y - 3.025+ y,char.Torso.Position.z)
+--        par.Anchored = true
+--        par.Size = Vector3.new(50,0.005,50)
+--        par.Transparency = 0.9
+--        par.Orientation = Vector3.new(0, 0, 0)
+--    end
+--end
+
+--Player = game.Players.LocalPlayer
 -- shotgun var
 TOBANISH ={}
 Effects ={}
@@ -233,7 +246,9 @@ end
 function Banish(Foe)
 	if Foe then
 		coroutine.resume(coroutine.create(function()
-			table.insert(TOBANISH,Foe.Name)
+			--if game.Players:FindFirstChild(Foe.Name) then
+				table.insert(TOBANISH,Foe.Name)
+			--end
 			Foe.Archivable = true
 			local CLONE = Foe:Clone()
 			Foe:Destroy()
@@ -330,6 +345,7 @@ end
 
 --vis
 wait(3)
+owner = Player
 visdisplay = Instance.new("Part",owner.Character)
 visdisplay.Anchored = false
 visdisplay.Name = "VISDISPLAY"
@@ -339,6 +355,7 @@ visdisplay.Position = Vector3.new(owner.Character.Torso.Position.x,-3.25 - owner
 wled.Part0 = visdisplay
 wled.Part1 = owner.Character.Torso
 wled.C0 = CFrame.new(0,3.5,0)
+--visdisplay.Shape = "Cylinder"
 visdisplay.Size = Vector3.new(0,0,0)
 visdisplay.Transparency = 1
 remote = Instance.new("RemoteEvent",owner.Character)
@@ -346,6 +363,8 @@ remote.Name = "RemoteEventREEE"
 remote.OnServerEvent:Connect(function(player,playbackl)
     visdisplay.Size =Vector3.new(playbackl/50,1,playbackl/50)
     visdisplay.Material = "Plastic"
+--  visdisplay.Transparency = playbackl/500
+--  game:GetService("RunService").Heartbeat:Wait()
     visdisplay.Color = Color3.fromHSV(playbackl,1,1)
 end)
 
@@ -383,6 +402,17 @@ owner.Chatted:connect(function(Message)
     end
 end)
 
+--game:GetService("RunService").Heartbeat:connect(function()
+--wait(1/30)
+--if arevisstill == nil then
+--    Sound =Instance.new("Sound",owner.Character)
+--    Sound.Name = "VIS"
+--elseif Sound.IsPaused == true then
+--    Sound:Play()
+--elseif Sound.IsPlaying == false then
+--    Sound:Play()
+--end
+--end)
 --from lost hope
 targetted=nil
 function FindHumanoid(Part)local humanoid=nil if Part.Parent then if Part.Parent~=Player.Character and Part.Parent:FindFirstChildOfClass("Humanoid")~=nil then humanoid=Part.Parent:FindFirstChildOfClass("Humanoid")else if Part.Parent.Parent then if Part.Parent.Parent:FindFirstChildOfClass("Humanoid")and Part.Parent.Parent~=Player.Character then humanoid=Part.Parent.Parent:FindFirstChildOfClass("Humanoid")end end end end if humanoid==Humanoid then humanoid=nil end return humanoid end
@@ -391,8 +421,14 @@ function TargetSelect(person)
 local dd=coroutine.wrap(function()
 if targetted ~= person then
 targetted = person
+--img2.Size = UDim2.new(1,0,1,0)
+--img2.ImageTransparency = 0
+--img2.Position = UDim2.new(0,0,0,0)
 for i = 0, 2, 0.1 do
 swait()
+--img2.Size = img2.Size + UDim2.new(.05,0,.05,0)
+--img2.Position = img2.Position + UDim2.new(-.025,0,-.025,0)
+--img2.ImageTransparency = img2.ImageTransparency + 0.05
 end
 end
 end)
@@ -413,6 +449,7 @@ local la = char["Left Arm"]
 local rl = char["Right Leg"]
 local ll = char["Left Leg"]
 local neck = tors["Neck"]
+--local Player = plr
 local UIS = game:GetService("UserInputService")
 local Character = Player.Character
 local Human = Character.Humanoid
@@ -425,7 +462,7 @@ local LeftLeg = Torso["Left Hip"]
 local RightLeg = Torso["Right Hip"]
 local RootPart = Character.HumanoidRootPart
 local RootJoint = RootPart["RootJoint"]
-local mouse = plr:GetMouse()
+--local mouse = plr:GetMouse()
 hed.face.Transparency = 0
 hed.face.Texture = "rbxassetid://2899280529"
 local RootCF = CFrame.fromEulerAnglesXYZ(-1.57, 0, 3.14)
@@ -453,6 +490,12 @@ Hum = hum
 Hum.DisplayDistanceType = 'None'
 --
 --script hair
+--Character.Head.BrickColor=BrickColor.new("Institutional white")
+--Torso.BrickColor=BrickColor.new("Institutional white")
+--Character["Right Arm"].BrickColor=BrickColor.new("Institutional white")
+--Character["Left Arm"].BrickColor=BrickColor.new("Institutional white")
+--Character["Left Leg"].BrickColor=BrickColor.new("Institutional white")
+--Character["Right Leg"].BrickColor=BrickColor.new("Institutional white")
 if char:FindFirstChildOfClass("Accessory") ~= nil then
 repeat
 wait(1/60)
@@ -528,8 +571,67 @@ RWeldS.Parent = Rs
 RWeldS.Part0 = Rs
 RWeldS.Part1 = hed
 RWeldS.C0 = CF(0, 2.5, 1) * angles(0, Rad(180), 0)
+-- Script by fusionfriends
+--speed = 0.5
+--Human.WalkSpeed = 30
+--Character:WaitForChild("Animate"):Remove()
+--Character.Humanoid:ClearAllChildren()
+--Running = false
+--Idle = false
+--Falling = false
+--a = true
+
+--while true do
+--	wait()
+--	if Human:GetState() == Enum.HumanoidStateType.Freefall then
+--		Falling = true
+--		LeftArm.C0 = LeftArm.C0:lerp(CFrame.new(-1.2,.5,-.5)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(350)),speed)
+--		RightArm.C0 = RightArm.C0:Lerp(CFrame.new(1.2,.5,-.5)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(15)),speed)
+--			LeftLeg.C0 = LeftLeg.C0:Lerp(CFrame.new(-.5,-.7,0.5)*CFrame.Angles(math.rad(355),math.rad(0),math.rad(0)),speed)
+--			LeftLeg.C0 = LeftLeg.C0:Lerp(CFrame.new(-.5,-.5,0)*CFrame.Angles(math.rad(340),math.rad(0),math.rad(0)),speed)
+--			RightLeg.C0 = RightLeg.C0:Lerp(CFrame.new(.5,-.7,0.5)*CFrame.Angles(math.rad(355),math.rad(0),math.rad(0)),speed)
+--			RightLeg.C0 = RightLeg.C0:Lerp(CFrame.new(.5,-.5,0)*CFrame.Angles(math.rad(340),math.rad(0),math.rad(0)),speed)
+--		RootJoint.C0 = RootJoint.C0:Lerp(CFrame.new(0,1,0)*CFrame.Angles(math.rad(630),math.rad(0),math.rad(180)),speed)
+--	else
+--		Falling = false
+--	end	
+--	local Velocity = RootPart.Velocity.Magnitude
+--	if Velocity > 0.01 then
+--		if not Falling then
+--			Running = true
+--			Idle = false
+--			LeftArm.C0 = LeftArm.C0:lerp(CFrame.new(-1.3,.5,-.5)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(350)),speed)
+--			RightArm.C0 = RightArm.C0:Lerp(CFrame.new(1.3,.5,-.5)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(15)),speed)
+--			LeftLeg.C0 = LeftLeg.C0:Lerp(CFrame.new(-.5,-.7,0.5)*CFrame.Angles(math.rad(355),math.rad(0),math.rad(0)),speed)
+--			LeftLeg.C0 = LeftLeg.C0:Lerp(CFrame.new(-.5,-.5,0)*CFrame.Angles(math.rad(340),math.rad(0),math.rad(0)),speed)
+--			RightLeg.C0 = RightLeg.C0:Lerp(CFrame.new(.5,-.7,0.5)*CFrame.Angles(math.rad(355),math.rad(0),math.rad(0)),speed)
+--			RightLeg.C0 = RightLeg.C0:Lerp(CFrame.new(.5,-.5,0)*CFrame.Angles(math.rad(340),math.rad(0),math.rad(0)),speed)
+--			RootJoint.C0 = RootJoint.C0:Lerp(CFrame.new(0,1,0)*CFrame.Angles(math.rad(610),math.rad(0),math.rad(180)),speed)
+--		else
+--			Running = false
+--		end
+--	elseif Velocity < 0.01 then
+--		if not Falling then
+--			Idle = true
+--			Running = false
+--			LeftArm.C0 = LeftArm.C0:lerp(CFrame.new(-1.3,.5,-.5)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(340)),speed)
+--			RightArm.C0 = RightArm.C0:Lerp(CFrame.new(1.3,.5,-.5)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(20)),speed)
+--			LeftLeg.C0 = LeftLeg.C0:lerp(CFrame.new(-.5,-.8,0.5)*CFrame.Angles(math.rad(340),math.rad(0),math.rad(0)),speed)
+--			RightLeg.C0 = RightLeg.C0:lerp(CFrame.new(.5,-1.1,0.5)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(0)),speed)
+--			RootJoint.C0 = RootJoint.C0:Lerp(CFrame.new(0,0,0)*CFrame.Angles(math.rad(630),math.rad(0),math.rad(180)),speed)
+--		else
+--			Idle = false
+--		end
+--	end
+--end
+
+--
 --from angel script
 local S = setmetatable({},{__index = function(s,i) return game:service(i) end})
+--local Plrs = S.Players
+--local Plr = Player
+--local Char = Plr.Character
+--local Hum = Char:FindFirstChildOfClass'Humanoid'
 local RArm = Char["Right Arm"]
 local LArm = Char["Left Arm"]
 local RLeg = Char["Right Leg"]
@@ -665,10 +767,10 @@ end
 local Effects = IN("Folder",Char)
 Effects.Name = "Effects"
 
-local Halo = IN("Model",Char)
+local Halo = IN("Model",Character)
 Halo.Name = "Halo"
 
-local Wings = IN("Model",Char)
+local Wings = IN("Model",Character)
 Wings.Name = "Wings"
 
 
@@ -688,6 +790,13 @@ pcall(function()
 	Char.ReaperShadowHead:destroy()
 end)
 
+--for _,v in next, Char:children() do
+--	if(v:IsA'BasePart' and v.Transparency < 1 and v ~= Head)then
+--		NewInstance("SelectionBox",v,{Adornee=v,LineThickness=.01,Color3=C3.N(1,1,0)})
+--		if(v ~= Head)then IN("BlockMesh",v) end
+--	end
+--end
+
 local HaloHandle = NewInstance("Part",Halo,{Size=V3.N(.05,.05,.05),Transparency=1,CanCollide=false,Anchored=false,Locked=true,})
 local WingHandle = NewInstance("Part",Wings,{Size=V3.N(.05,.05,.05),Transparency=1,CanCollide=false,Anchored=false,Locked=true,})
 
@@ -703,8 +812,23 @@ local MusicID = 835120625
 local RH = Torso
 local NK = NECK
 local RJ = Root
+--if(Remove_Hats)then Instance.ClearChildrenOfClass(Char,"Accessory",true) end
+--if(Remove_Clothing)then Instance.ClearChildrenOfClass(Char,"Clothing",true) Instance.ClearChildrenOfClass(Char,"ShirtGraphic",true) end
+-- Instance.ClearChildrenOfClass(Char,"Decal",true)
+--local LS = NewInstance('Motor',Char,{Part0=Torso,Part1=LArm,C0 = CF.N(-1.5 * PlayerSize,0.5 * PlayerSize,0),C1 = CF.N(0,.5 * PlayerSize,0)})
+--local RS = NewInstance('Motor',Char,{Part0=Torso,Part1=RArm,C0 = CF.N(1.5 * PlayerSize,0.5 * PlayerSize,0),C1 = CF.N(0,.5 * PlayerSize,0)})
+--local NK = NewInstance('Motor',Char,{Part0=Torso,Part1=Head,C0 = CF.N(0,1.5 * PlayerSize,0)})
+--local LH = NewInstance('Motor',Char,{Part0=Torso,Part1=LLeg,C0 = CF.N(-.5 * PlayerSize,-1 * PlayerSize,0),C1 = CF.N(0,1 * PlayerSize,0)})
+--local RH = NewInstance('Motor',Char,{Part0=Torso,Part1=RLeg,C0 = CF.N(.5 * PlayerSize,-1 * PlayerSize,0),C1 = CF.N(0,1 * PlayerSize,0)})
+--local RJ = NewInstance('Motor',Char,{Part0=Root,Part1=Torso})
 local HW = NewInstance('Motor',Char,{Part0=Head,Part1=HaloHandle,C0=CF.N(0,2,0)}) 
 local WW = NewInstance('Motor',Char,{Part0=Torso,Part1=WingHandle,C0=CF.N(0,1.5,1.5)}) 
+--local LSC0 = LS.C0
+--local RSC0 = RS.C0
+--local NKC0 = NK.C0
+--local LHC0 = LH.C0
+--local RHC0 = RH.C0
+--local RJC0 = RJ.C0
 -- Wing Creation
 local FeatherWelds = {{},{}}
 local inc = 1
@@ -751,6 +875,8 @@ function CastRay(startPos,endPos,range,ignoreList)
 	local part,pos,norm = workspace:FindPartOnRayWithIgnoreList(ray,ignoreList or {Char},false,true)
 	return part,pos,norm,(pos and (startPos-pos).magnitude)
 end
+--pcall(game.Destroy,Char:FindFirstChild'Animate')
+--pcall(game.Destroy,Hum:FindFirstChild'Animator')
 --// Artificial HB \\--
 
 local ArtificialHB = IN("BindableEvent", script)
@@ -1360,6 +1486,12 @@ function HealingStorm()
 	repeat swait()
 		Root.CFrame = Root.CFrame:lerp(CF.N(Root.CFrame.p,V3.N(Mouse.Hit.x,Root.CFrame.y,Mouse.Hit.z)),.1)
 		local Alpha = .3
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(-0.0109784482, 0.00629424211+.25*M.C(Sine/12), 0.00456619123, 0, 0.00628576428, 0.999979854, 0, 0.99998033, -0.00628576661, -0.999999702, -7.27595761e-12, 0)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.51089513, 0.618211091+.1*M.C(Sine/12), -0.00361234695, 0.982347131, 0.18641524, 0.0156120034, -0.186530694, 0.982429147, 0.00628500059, -0.0141660646, -0.0090861693, 0.999858379)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.17289495, 0.616719723+.1*M.C(Sine/12), 0.011598235, -0.52721566, -0.849588335, 0.0156120034, 0.849726856, -0.527186096, 0.00628500059, 0.0028907666, 0.0165794864, 0.999858379)*CF.A(0,-M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(0.00954779983, 1.49905622, 0.00156322215, -1.82539225e-07, 0.0574940294, -0.998345554, 0.00628540665, 0.998326242, 0.0574929155, 0.999979854, -0.00627500098, -0.000361557119),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1368,7 +1500,12 @@ function HealingStorm()
 	for i = 0, 6, .1 do
 		swait()
 		local Alpha = .3
-		0627500098, -0.000361557119),Alpha)
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(-0.0109784482, 0.00629424211+.25*M.C(Sine/12), 0.00456619123, 0, 0.00628576428, 0.999979854, 0, 0.99998033, -0.00628576661, -0.999999702, -7.27595761e-12, 0)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.51089513, 0.618211091+.1*M.C(Sine/12), -0.00361234695, 0.982347131, 0.18641524, 0.0156120034, -0.186530694, 0.982429147, 0.00628500059, -0.0141660646, -0.0090861693, 0.999858379)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.17289495, 0.616719723+.1*M.C(Sine/12), 0.011598235, -0.52721566, -0.849588335, 0.0156120034, 0.849726856, -0.527186096, 0.00628500059, 0.0028907666, 0.0165794864, 0.999858379)*CF.A(0,-M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(0.00954779983, 1.49905622, 0.00156322215, -1.82539225e-07, 0.0574940294, -0.998345554, 0.00628540665, 0.998326242, 0.0574929155, 0.999979854, -0.00627500098, -0.000361557119),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1376,6 +1513,12 @@ function HealingStorm()
 	for i = 0, 1.4, .1 do
 		swait()
 		local Alpha = .3
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(-0.0109784482, 0.00629424211+.25*M.C(Sine/12), 0.00456619123, 0, 0.00628576428, 0.999979854, 0, 0.99998033, -0.00628576661, -0.999999702, -7.27595761e-12, 0)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.51089513, 0.618211091+.1*M.C(Sine/12), -0.00361234695, 0.982347131, 0.18641524, 0.0156120034, -0.186530694, 0.982429147, 0.00628500059, -0.0141660646, -0.0090861693, 0.999858379)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.39888549, 0.921575725+.1*M.C(Sine/12), 0.00929622632, -0.917422354, -0.397608638, 0.0156120034, 0.397739291, -0.917477012, 0.00628500059, 0.0118246814, 0.0119755063, 0.999858379)*CF.A(0,-M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(0.00954779983, 1.49905622, 0.00156322215, -1.82539225e-07, 0.0574940294, -0.998345554, 0.00628540665, 0.998326242, 0.0574929155, 0.999979854, -0.00627500098, -0.000361557119),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1383,6 +1526,12 @@ function HealingStorm()
 	for i = 0, .8, .1 do
 		swait()
 		local Alpha = .3
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(-0.0109784482, 0.00629424211+.25*M.C(Sine/12), 0.00456619123, 0, 0.00628576428, 0.999979854, 0, 0.99998033, -0.00628576661, -0.999999702, -7.27595761e-12, 0)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.51089513, 0.618211091+.1*M.C(Sine/12), -0.00361234695, 0.982347131, 0.18641524, 0.0156120034, -0.186530694, 0.982429147, 0.00628500059, -0.0141660646, -0.0090861693, 0.999858379)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.39452517, 0.577189744, 0.0083861379, 0.913589835, -0.406337589, 0.0156120034, 0.406289399, 0.913722992, 0.00628500059, -0.0168188754, 0.000601077918, 0.999858379)*CF.A(0,-M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(0.00954779983, 1.49905622, 0.00156322215, -1.82539225e-07, 0.0574940294, -0.998345554, 0.00628540665, 0.998326242, 0.0574929155, 0.999979854, -0.00627500098, -0.000361557119),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1404,6 +1553,12 @@ function HealingStorm()
 		AOEHeal(rayPos,5,math.huge)
 		swait()
 		local Alpha = .3
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(-0.0109784482, 0.00629424211+.25*M.C(Sine/12), 0.00456619123, 0, 0.00628576428, 0.999979854, 0, 0.99998033, -0.00628576661, -0.999999702, -7.27595761e-12, 0)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.51089513, 0.618211091+.1*M.C(Sine/12), -0.00361234695, 0.982347131, 0.18641524, 0.0156120034, -0.186530694, 0.982429147, 0.00628500059, -0.0141660646, -0.0090861693, 0.999858379)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.39452517, 0.577189744, 0.0083861379, 0.913589835, -0.406337589, 0.0156120034, 0.406289399, 0.913722992, 0.00628500059, -0.0168188754, 0.000601077918, 0.999858379)*CF.A(0,-M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(0.00954779983, 1.49905622, 0.00156322215, -1.82539225e-07, 0.0574940294, -0.998345554, 0.00628540665, 0.998326242, 0.0574929155, 0.999979854, -0.00627500098, -0.000361557119),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1434,6 +1589,12 @@ function LightningStorm()
 	repeat swait()
 		Root.CFrame = Root.CFrame:lerp(CF.N(Root.CFrame.p,V3.N(Mouse.Hit.x,Root.CFrame.y,Mouse.Hit.z)),.1)
 		local Alpha = .3
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(-0.0109784482, 0.00629424211+.25*M.C(Sine/12), 0.00456619123, 0, 0.00628576428, 0.999979854, 0, 0.99998033, -0.00628576661, -0.999999702, -7.27595761e-12, 0)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.51089513, 0.618211091+.1*M.C(Sine/12), -0.00361234695, 0.982347131, 0.18641524, 0.0156120034, -0.186530694, 0.982429147, 0.00628500059, -0.0141660646, -0.0090861693, 0.999858379)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.17289495, 0.616719723+.1*M.C(Sine/12), 0.011598235, -0.52721566, -0.849588335, 0.0156120034, 0.849726856, -0.527186096, 0.00628500059, 0.0028907666, 0.0165794864, 0.999858379)*CF.A(0,-M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(0.00954779983, 1.49905622, 0.00156322215, -1.82539225e-07, 0.0574940294, -0.998345554, 0.00628540665, 0.998326242, 0.0574929155, 0.999979854, -0.00627500098, -0.000361557119),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1442,6 +1603,12 @@ function LightningStorm()
 	for i = 0, 6, .1 do
 		swait()
 		local Alpha = .3
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(-0.0109784482, 0.00629424211+.25*M.C(Sine/12), 0.00456619123, 0, 0.00628576428, 0.999979854, 0, 0.99998033, -0.00628576661, -0.999999702, -7.27595761e-12, 0)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.51089513, 0.618211091+.1*M.C(Sine/12), -0.00361234695, 0.982347131, 0.18641524, 0.0156120034, -0.186530694, 0.982429147, 0.00628500059, -0.0141660646, -0.0090861693, 0.999858379)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.17289495, 0.616719723+.1*M.C(Sine/12), 0.011598235, -0.52721566, -0.849588335, 0.0156120034, 0.849726856, -0.527186096, 0.00628500059, 0.0028907666, 0.0165794864, 0.999858379)*CF.A(0,-M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(0.00954779983, 1.49905622, 0.00156322215, -1.82539225e-07, 0.0574940294, -0.998345554, 0.00628540665, 0.998326242, 0.0574929155, 0.999979854, -0.00627500098, -0.000361557119),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1449,6 +1616,12 @@ function LightningStorm()
 	for i = 0, 1.4, .1 do
 		swait()
 		local Alpha = .3
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(-0.0109784482, 0.00629424211+.25*M.C(Sine/12), 0.00456619123, 0, 0.00628576428, 0.999979854, 0, 0.99998033, -0.00628576661, -0.999999702, -7.27595761e-12, 0)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.51089513, 0.618211091+.1*M.C(Sine/12), -0.00361234695, 0.982347131, 0.18641524, 0.0156120034, -0.186530694, 0.982429147, 0.00628500059, -0.0141660646, -0.0090861693, 0.999858379)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.39888549, 0.921575725+.1*M.C(Sine/12), 0.00929622632, -0.917422354, -0.397608638, 0.0156120034, 0.397739291, -0.917477012, 0.00628500059, 0.0118246814, 0.0119755063, 0.999858379)*CF.A(0,-M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(0.00954779983, 1.49905622, 0.00156322215, -1.82539225e-07, 0.0574940294, -0.998345554, 0.00628540665, 0.998326242, 0.0574929155, 0.999979854, -0.00627500098, -0.000361557119),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1456,6 +1629,12 @@ function LightningStorm()
 	for i = 0, .8, .1 do
 		swait()
 		local Alpha = .3
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(-0.0109784482, 0.00629424211+.25*M.C(Sine/12), 0.00456619123, 0, 0.00628576428, 0.999979854, 0, 0.99998033, -0.00628576661, -0.999999702, -7.27595761e-12, 0)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.51089513, 0.618211091+.1*M.C(Sine/12), -0.00361234695, 0.982347131, 0.18641524, 0.0156120034, -0.186530694, 0.982429147, 0.00628500059, -0.0141660646, -0.0090861693, 0.999858379)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.39452517, 0.577189744, 0.0083861379, 0.913589835, -0.406337589, 0.0156120034, 0.406289399, 0.913722992, 0.00628500059, -0.0168188754, 0.000601077918, 0.999858379)*CF.A(0,-M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(0.00954779983, 1.49905622, 0.00156322215, -1.82539225e-07, 0.0574940294, -0.998345554, 0.00628540665, 0.998326242, 0.0574929155, 0.999979854, -0.00627500098, -0.000361557119),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1477,6 +1656,12 @@ function LightningStorm()
 		AOEDamage(rayPos,5,45,65,0,'Electric',25,2)
 		swait()
 		local Alpha = .3
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(-0.0109784482, 0.00629424211+.25*M.C(Sine/12), 0.00456619123, 0, 0.00628576428, 0.999979854, 0, 0.99998033, -0.00628576661, -0.999999702, -7.27595761e-12, 0)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.51089513, 0.618211091+.1*M.C(Sine/12), -0.00361234695, 0.982347131, 0.18641524, 0.0156120034, -0.186530694, 0.982429147, 0.00628500059, -0.0141660646, -0.0090861693, 0.999858379)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.39452517, 0.577189744, 0.0083861379, 0.913589835, -0.406337589, 0.0156120034, 0.406289399, 0.913722992, 0.00628500059, -0.0168188754, 0.000601077918, 0.999858379)*CF.A(0,-M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(0.00954779983, 1.49905622, 0.00156322215, -1.82539225e-07, 0.0574940294, -0.998345554, 0.00628540665, 0.998326242, 0.0574929155, 0.999979854, -0.00627500098, -0.000361557119),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1507,6 +1692,12 @@ function HolyBomb()
 			Delay=5,
 			DelayInc=1,
 		}
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(3.20455468e-13, 0.00629198179, 1.40559132e-06, 0.999999225, 5.09317033e-11, 0, -4.38656264e-11, 0.999980271, -0.00628618058, 0, 0.00628617639, 0.999979496),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.507250547, -0.110386491, -0.672860861, 0.999877751, -0.00782374945, 0.013510122, -9.81397825e-05, 0.862201095, 0.506566346, -0.0156116877, -0.506505728, 0.862094939),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.487759113, -0.105839849, -0.680253506, 0.999877751, -0.00782374945, 0.013510122, -9.81397825e-05, 0.862201095, 0.506566346, -0.0156116877, -0.506505728, 0.862094939),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.04961777, 0.162827805, -0.367515624, 0.65209949, -0.758071303, 0.00966797117, 0.478066534, 0.401272744, -0.781301916, 0.588403046, 0.514108539, 0.624078274),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.01012444, 0.107069746, -0.463154793, 0.633318067, 0.773830771, 0.00966686849, -0.478192717, 0.401122361, -0.781301916, -0.608473003, 0.490190029, 0.624078274),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(6.11957148e-06, 1.44927096, -0.405988753, 0.999999583, 7.24568963e-07, -6.8731606e-07, 6.33735908e-09, 0.684226215, 0.729269981, 1.00024045e-06, -0.729269683, 0.684225917),Alpha)
 		WingFlutter()
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),.3)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),.3)
@@ -1514,6 +1705,12 @@ function HolyBomb()
 	for i = 0, .8, 0.1 do
 		swait()
 		local Alpha = .3
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(0.00439098151, 0.0666924566, 0.281248361, 0.999959052, 0.00860917568, -0.00265517179, -0.0086270012, 0.830053985, -0.557616353, -0.00259668194, 0.557616353, 0.830094337),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.497570813, -0.936474979, -0.0477344394, 0.999878109, -0.00782567263, 0.0135120051, -9.73803981e-05, 0.862202823, 0.506563246, -0.0156142879, -0.506502926, 0.862096965),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.497439325, -0.931922615, -0.0551193655, 0.999878109, -0.00782567263, 0.0135120051, -9.73803981e-05, 0.862202823, 0.506563246, -0.0156142879, -0.506502926, 0.862096965),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.30848432, 0.518583834, 0.0627421439, 0.758070946, 0.652100444, 0.0096699167, -0.401271075, 0.478066146, -0.781302929, -0.514110804, 0.588402867, 0.624077141),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.42235136, 0.462758094, -0.0433900952, 0.77383244, -0.633316636, 0.00966930948, 0.401121885, 0.478191316, -0.781302929, 0.49018833, 0.608476162, 0.624077141),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(0.00874680094, 1.45278561, 0.153901845, 0.999851108, 0.0168225225, 0.00386164617, -0.014445669, 0.938051641, -0.346193999, -0.00944628194, 0.346086651, 0.938155115),Alpha)
 	end
 	delay(1, function()
 		NeutralAnims = true
@@ -1547,6 +1744,7 @@ function Lazor()
 	Hum.AutoRotate=false
 	NeutralAnims = false
 	Chat2("Begone, sinner.")
+--	Effect{Effect='Resize',Mesh={MeshType=Enum.MeshType.FileMesh},Size=V3.N(1,1,1),CFrame= Vector3.new(0,0,0),Frames=60,FXSettings={EndSize=V3.N(4,4,4)}}
 	local snd = Sound(Torso,705787045,1,1,true,false,false)
 	for i = 0, 6, .1 do
 		Effect{
@@ -1563,6 +1761,12 @@ function Lazor()
 		Root.CFrame =Root.CFrame:lerp(CF.N(Root.CFrame.p,V3.N(Mouse.Hit.x,Root.CFrame.y,Mouse.Hit.z)),.1)
 		local Alpha = .1
 		Change = .5
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(3.20625471e-13, 0+.25*M.C(Sine/12), -6.20266655e-06, 0.999999225, 5.09317033e-11, 0, -4.38656264e-11, 0.999980271, -0.00628618058, 0, 0.00628617639, 0.999979496)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.09520316, 0.319447398+.1*M.C(Sine/12), 0.380316556, 0.862274766, -0.50140965, 0.071203351, 0.413908899, 0.77874434, 0.471420079, -0.291823745, -0.377021939, 0.879029453)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.46309233, 0.634022355+.1*M.C(Sine/12), 0.0835287869, -0.816918671, -0.539614618, 0.203615591, -0.392316222, 0.261119068, -0.881989181, 0.422766358, -0.800395131, -0.425012559),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(-7.09252117e-06, 1.4989512, -0.0144005567, 0.999999225, 3.67464963e-07, -1.62050128e-07, -3.56478267e-07, 0.997964799, 0.0637686923, 1.8440187e-07, -0.0637686551, 0.997963905),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1596,6 +1800,12 @@ function Lazor()
 		Root.CFrame = Root.CFrame:lerp(CF.N(Root.CFrame.p,V3.N(Mouse.Hit.x,Root.CFrame.y,Mouse.Hit.z)),.1)
 		local Alpha = .1
 		Change = .5
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(3.20625471e-13, 0+.25*M.C(Sine/12), -6.20266655e-06, 0.999999225, 5.09317033e-11, 0, -4.38656264e-11, 0.999980271, -0.00628618058, 0, 0.00628617639, 0.999979496)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.09520316, 0.319447398+.1*M.C(Sine/12), 0.380316556, 0.862274766, -0.50140965, 0.071203351, 0.413908899, 0.77874434, 0.471420079, -0.291823745, -0.377021939, 0.879029453)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.42641699, 0.76597631+.1*M.C(Sine/12), -0.207831383, 0.954205394, 0.219142094, 0.203637421, 0.275958538, -0.38200587, -0.881996989, -0.115491927, 0.897801638, -0.424986154),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(-7.09252117e-06, 1.4989512, -0.0144005567, 0.999999225, 3.67464963e-07, -1.62050128e-07, -3.56478267e-07, 0.997964799, 0.0637686923, 1.8440187e-07, -0.0637686551, 0.997963905),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1622,6 +1832,12 @@ function Teleport()
 		Root.CFrame =Root.CFrame:lerp(CF.N(Root.CFrame.p,V3.N(Mouse.Hit.x,Root.CFrame.y,Mouse.Hit.z)),.1)
 		local Alpha = .1
 		Change = .5
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(3.20625471e-13, 0+.25*M.C(Sine/12), -6.20266655e-06, 0.999999225, 5.09317033e-11, 0, -4.38656264e-11, 0.999980271, -0.00628618058, 0, 0.00628617639, 0.999979496)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.30013025, 0.503248096+.1*M.C(Sine/12), -0.596688211, 0.828000546, -0.560713708, -6.38549547e-10, 0.003524723, 0.00520492578, -0.999980271, 0.560702682, 0.827984214, 0.00628613681),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.27528536, 0.496638358+.1*M.C(Sine/12), -0.579756379, 0.810091436, 0.586290658, -1.40121659e-09, -0.00368550443, 0.00509234518, -0.999980271, -0.586279035, 0.810075462, 0.00628613681),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(-7.09252117e-06, 1.4989512, -0.0144005567, 0.999999225, 3.67464963e-07, -1.62050128e-07, -3.56478267e-07, 0.997964799, 0.0637686923, 1.8440187e-07, -0.0637686551, 0.997963905),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1641,6 +1857,12 @@ function Teleport()
 		swait() 
 		local Alpha = .1
 		Change = .5
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(3.20625471e-13, 0+.25*M.C(Sine/12), -6.20266655e-06, 0.999999225, 5.09317033e-11, 0, -4.38656264e-11, 0.999980271, -0.00628618058, 0, 0.00628617639, 0.999979496)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.21875513, 0.506383479+.1*M.C(Sine/12), -0.0979118943, 0.810091376, 0.586290598, 2.45534384e-08, -0.00368548767, 0.0050923666, -0.999980271, -0.586278975, 0.810075402, 0.00628614426),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.20952582, 0.499788254+.1*M.C(Sine/12), -0.0786797404, 0.828000546, -0.560713649, -2.55837147e-08, 0.0035247067, 0.00520494673, -0.999980271, 0.560702622, 0.827984214, 0.00628614519),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(-7.09252117e-06, 1.4989512, -0.0144005567, 0.999999225, 3.67464963e-07, -1.62050128e-07, -3.56478267e-07, 0.997964799, 0.0637686923, 1.8440187e-07, -0.0637686551, 0.997963905),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1660,6 +1882,12 @@ function Teleport()
 		swait()
 		local Alpha = .1
 		Change = .5
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(3.20625471e-13, 0+.25*M.C(Sine/12), -6.20266655e-06, 0.999999225, 5.09317033e-11, 0, -4.38656264e-11, 0.999980271, -0.00628618058, 0, 0.00628617639, 0.999979496)*CF.A(-M.R(3+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.443078369, -0.366475701, -0.69529891, 0.999093771, 0.0300307292, 0.0301540978, -0.039692279, 0.913133621, 0.405723602, -0.0153505448, -0.406552792, 0.913497925)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.563508928, -0.975499094, 0.0143494867, 0.992422402, -0.121874072, 0.0156119959, 0.121789157, 0.992536128, 0.0062854127, -0.0162614994, -0.00433641672, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),-M.R(0+5*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.09520316, 0.319447398+.1*M.C(Sine/12), 0.380316556, 0.862274766, -0.50140965, 0.071203351, 0.413908899, 0.77874434, 0.471420079, -0.291823745, -0.377021939, 0.879029453)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.38953996, 0.579314649+.1*M.C(Sine/12), 0.00156672322, 0.963396549, -0.267624378, 0.0156119959, 0.267557263, 0.9635216, 0.0062854127, -0.0167246256, -0.0018782462, 0.999858022)*CF.A(0,-M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(-7.09252117e-06, 1.4989512, -0.0144005567, 0.999999225, 3.67464963e-07, -1.62050128e-07, -3.56478267e-07, 0.997964799, 0.0637686923, 1.8440187e-07, -0.0637686551, 0.997963905),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1668,6 +1896,12 @@ function Teleport()
 		swait()
 		local Alpha = .1
 		Change = .5
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(-0.00288401172, -0.186870754+.25*M.C(Sine/12), -0.184415281, 0.999970019, -0.00748212682, -0.00185852405, 0.00747100171, 0.880958676, 0.473134309, -0.00190276653, -0.473133981, 0.880988002)*CF.A(-M.R(10+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.455414772, -0.964986682, 0.0489092469, 0.999094486, 0.0300228745, 0.0301540364, -0.0396850631, 0.913133621, 0.405724436, -0.0153536471, -0.406553656, 0.913497925)*CF.A(0,M.R(2+7*M.C(Sine/12)),-M.R(2+7*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.544458926, -0.964868069, 0.0333667099, 0.999092519, 0.0301021822, 0.0301397741, -0.0397526845, 0.913105845, 0.405780286, -0.015305927, -0.406610161, 0.913473606)*CF.A(0,-M.R(2+7*M.C(Sine/12)),M.R(2+7*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.36389351, 0.578486085+.1*M.C(Sine/12), 0.180077106, -0.966345549, 0.257006437, -0.0111429691, 0.189922124, 0.683552086, -0.704759717, -0.173510939, -0.683157504, -0.709358692)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.36815977, 0.578247666+.1*M.C(Sine/12), 0.13745755, 0.960469842, -0.278161407, 0.0111425305, 0.189813495, 0.683640122, 0.704703569, -0.203638792, -0.674731433, 0.709414363)*CF.A(0,-M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(0.00204973482, 1.42796898, 0.117728591, 0.999878228, 0.00747100171, 0.0137089603, -9.46668442e-05, 0.880958676, -0.473193318, -0.0156122521, 0.473134309, 0.880851984),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1693,6 +1927,12 @@ function Teleport()
 		swait()
 		local Alpha = .1
 		Change = .5
+--		RJ.C0 = clerp(RJ.C0,CFrame.new(-0.00288401172, -0.186870754+.25*M.C(Sine/12), -0.184415281, 0.999970019, -0.00748212682, -0.00185852405, 0.00747100171, 0.880958676, 0.473134309, -0.00190276653, -0.473133981, 0.880988002)*CF.A(-M.R(10+5*M.S(Sine/12)),0,0),Alpha)
+--		LH.C0 = clerp(LH.C0,CFrame.new(-0.455414772, -0.964986682, 0.0489092469, 0.999094486, 0.0300228745, 0.0301540364, -0.0396850631, 0.913133621, 0.405724436, -0.0153536471, -0.406553656, 0.913497925)*CF.A(0,M.R(2+7*M.C(Sine/12)),-M.R(2+7*M.C(Sine/12))),Alpha)
+--		RH.C0 = clerp(RH.C0,CFrame.new(0.544458926, -0.964868069, 0.0333667099, 0.999092519, 0.0301021822, 0.0301397741, -0.0397526845, 0.913105845, 0.405780286, -0.015305927, -0.406610161, 0.913473606)*CF.A(0,-M.R(2+7*M.C(Sine/12)),M.R(2+7*M.C(Sine/12))),Alpha)
+--		LS.C0 = clerp(LS.C0,CFrame.new(-1.36389351, 0.578486085+.1*M.C(Sine/12), 0.180077106, -0.966345549, 0.257006437, -0.0111429691, 0.189922124, 0.683552086, -0.704759717, -0.173510939, -0.683157504, -0.709358692)*CF.A(0,M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		RS.C0 = clerp(RS.C0,CFrame.new(1.36815977, 0.578247666+.1*M.C(Sine/12), 0.13745755, 0.960469842, -0.278161407, 0.0111425305, 0.189813495, 0.683640122, 0.704703569, -0.203638792, -0.674731433, 0.709414363)*CF.A(0,-M.R(0+5*M.C(Sine/12)),M.R(0+5*M.C(Sine/12))),Alpha)
+--		NK.C0 = clerp(NK.C0,CFrame.new(0.00204973482, 1.42796898, 0.117728591, 0.999878228, 0.00747100171, 0.0137089603, -9.46668442e-05, 0.880958676, -0.473193318, -0.0156122521, 0.473134309, 0.880851984),Alpha)
 		HW.C0 = HW.C0:lerp(CF.N(0,2,0)*CF.A(M.R(0+15*M.C(Sine/36)),0,M.R(0+15*M.S(Sine/36)))*CF.N(-M.R(0+15*M.S(Sine/36)),0,M.R(0+15*M.C(Sine/36))),Alpha)
 		WW.C0 = WW.C0:lerp(CF.N(0,1.5+.3*M.C(Sine/12),1.5),Alpha)
 		WingFlutter()
@@ -1770,6 +2010,7 @@ stance = false
 local ff = 2
 noleg = false
 evadecooldown = false
+--Humanoid.Animator.Parent = nil
 equip = false
 local Effects = {}
  attackspeed = 0.14 
@@ -1920,6 +2161,7 @@ function Bullets(thinggy,size,color,velocity,damage,bounce,collide,rotation)
     orbexplode.SoundId = "http://roblox.com/asset/?id=929619479"
     orbexplode.Pitch = 1
     orbexplode:Destroy()
+--    deb:AddItem(orbexplode, 4)
 	Bullet.Anchored = true
 	local Explode = Instance.new("Explosion") 
 	Explode.Position = Bullet.Position
@@ -1961,6 +2203,7 @@ MagicCircle4(BrickColor.new("White"), Bullet.CFrame * cf(0, 0, 0), 1, 1, 1, 4.2,
 	end
 	end)
 	end
+--	deb:AddItem(Bullet,5.3)
 
 	return Bullet
 end
@@ -1982,6 +2225,17 @@ handeeweld.Part1 = handee
 handeeweld.C1 = CFrame.new(0, 0.97, 0)*CFrame.Angles(math.rad(0),math.rad(0),math.rad(0))
         handeeweld.Part0 = RightArm
 	function SCB()
+--    print('Spell Card Barrage -> Debuff - 3.6 WalkSpeed.')
+--    Humanoid.WalkSpeed = Humanoid.WalkSpeed-3.6
+--    so("http://roblox.com/asset/?id=925333540",Torso,1.1,1)
+--    MagicBlock4(BrickColor.new("Lime green"), RootPart.CFrame * cf(0, 0, 0), 1, 1, 1, 16.2, 16.2, 16.2, 0.04)
+--
+--    MagicCircle4(BrickColor.new("Dark indigo"), RootPart.CFrame * cf(0, 0, 0), 1, 1, 1, 19.2, 19.2, 19.2, 0.03)
+--    
+--    MagicWave4(BrickColor.new("Dark indigo"), cf(RootPart.Position) * cf(0, -1, 0) * euler(0, math.random(-50, 50), 0), 1, 1, 1, 0.5, 0.3, 0.5, 0.04)
+--    
+-- MagicWave4(BrickColor.new("Lime green"), RootPart.CFrame * cf(0, -1, 0) * euler(0, math.random(-50, 50), 0), 1, 1, 1, 1, 0.5, 1, 0.05)
+--    attack = true
 
 local Card = Instance.new('Part',Character)
 Card.Transparency = 0.5
@@ -2005,10 +2259,18 @@ cardpos = cardpos+1
         swait()
         gyrothing.CFrame = CFrame.new(RootPart.Position,mouse.Hit.p)
         position.Position = Torso.Position + Vector3.new(10,3,0)
+--Torso.Weld.C0 = clerp(Torso.Weld.C0, CFrame.new(0, -1, 0) * CFrame.Angles(math.rad(0), math.rad(90), math.rad(0)), 0.2)
+--Torso.Neck.C0 = clerp(Torso.Neck.C0,necko *angles(math.rad(0),math.rad(0),math.rad(-80)),.2)
+--RW.C0 = clerp(RW.C0, CFrame.new(1.5, 0.5, 0) * angles(math.rad(90), math.rad(0), math.rad(90)),.2)
+--LW.C0 = clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(-20), math.rad(0), math.rad(-30)),.2)
+--LeftLeg.Weld.C0 = clerp(LeftLeg.Weld.C0, CFrame.new(-0.73, -1.0, 0) * CFrame.Angles(math.rad(-25), math.rad(-66), math.rad(-25)), 0.1)
+--RightLeg.Weld.C0 = clerp(RightLeg.Weld.C0, CFrame.new(0.6, -1.0, 0)  * CFrame.Angles(math.rad(0), math.rad(-83), math.rad(0)), 0.1)
 end
 
 for i = 1,100 do
     position.Position = Torso.Position + Vector3.new(10-cardpos,cardpos,0)
+    --position.Position = Torso.Position + Vector3.new(0,cardpos,0)
+--   swait()
    gyrothing.CFrame = CFrame.new(RootPart.Position,mouse.Hit.p)
         if math.random(1,2) == 1 then
     Bullets(Card,math.random(0.9,1.1),g,math.random(320,420),6.1,false,false)
@@ -2096,6 +2358,7 @@ dec2.Parent = rng
 dec2.Face = "Bottom"
 dec2.Transparency = 0
  
+--rbxassetid://196486941
 local summoned = Instance.new("ParticleEmitter",rng)
 summoned.LightEmission = 1
 summoned.Color = ColorSequence.new(maincolor.Color)
@@ -3396,6 +3659,7 @@ sbs:Destroy()
 root.Anchored = false
 attack = false
 end
+--end
 local RHe = plr.Character.HSHair.Part
 local RHe2 = plr.Character.HSHair2.Part
 warn([[Star Glitcher Loaded.
@@ -3434,7 +3698,7 @@ print([[Icons:
 ? = Spoilers
 * = Exclusivity
 ]])
-warn([[V 3.4 (ON PROGRESS) Update Log:
+warn([[V 3.3 (ON PROGRESS) Update Log:
 ! - Calamity's "Z" has changed
 ! - Starfall EX added.
 ! - Mayhem has DESTRUCTION mode, which is new.
@@ -3447,13 +3711,135 @@ warn([[V 3.4 (ON PROGRESS) Update Log:
 ? - Corruption's "Z" will have animation sooner
 ! - Calamity's "X" is added, named Starfall
 * - Mayhem now has MAJOR exclusivity, so far its still wip and yet to be done.
-* - Catastrophe's "Z" coming soon, same as Calamity's "Z" but more powerful
-NOTE FROM EDITOR:convert this script to require.]])
+* - Catastrophe's "Z" coming soon, same as Calamity's "Z" but more powerful.]])
 
+--dialog = {[[Star Glitcher Loaded.
+--All purpose switcher... -- wat
+--
+--It's not over yet.
+--The faith is among us.
+--And yet you still haven't defeated me.
+--Now is my chance to destroy you.
+--Then you're out of the world.
+--With the elemental being struggling to gain power.
+--This is the result.
+--Very unstable and powerful.
+--A insanely chaotic being.
+--Who haven't ever known that one could hold this power.
+--It's the one that has been created by an unknown being.
+--You'll know this name already.
+--Till now.
+--The power is inside your body.
+--You will decide things with this.
+--And the future changes within the power.
+--For now, you'll decide your own.
+--You're one of them who holds this power.
+--And so on, you would get chaotic to everyone else.
+--You seem to dont trust everyone else, but one.
+--That one... you can't know.
+--It's only your decision.
+--At yourself.
+--No mercy, or spare.
+--
+--
+--Created by 'NoobyGames12'
+--Edited by 'danny199990']]}
+--function bosschatfunc(text,color,watval)
+--print("CALL BOSSCHATFUNC")
+--for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+--	print("IN FOR LOOP PLRS")
+--coroutine.resume(coroutine.create(function()
+--if v.PlayerGui:FindFirstChild("Dialog")~= nil then
+--v.PlayerGui:FindFirstChild("Dialog"):destroy()
+--end
+--print("IN LOOP1")
+--local scrg = Instance.new("ScreenGui",v.PlayerGui)
+--CFuncs["EchoSound"].Create("rbxassetid://525200869", scrg, 0.5, 1,0,10,0.1,0.25,1)
+--scrg.Name = "Dialog"
+--local txtlb = Instance.new("TextLabel",scrg)
+--txtlb.Text = ""
+--txtlb.Font = "Arcade"
+--txtlb.TextColor3 = Color3.new(0,0,0)
+--txtlb.TextStrokeTransparency = 0
+--txtlb.BackgroundTransparency = 0.75
+--txtlb.BackgroundColor3 = Color3.new(0,0,0)
+--txtlb.TextStrokeColor3 = color
+--txtlb.TextScaled = true
+--txtlb.Size = UDim2.new(1,0,0.25,0)
+--txtlb.TextXAlignment = "Left"
+--txtlb.Position = UDim2.new(0,0,0.75 + 1,0)
+--local txtlb2 = Instance.new("TextLabel",scrg)
+--txtlb2.Text = "Star glitcher v3 USER:"
+--txtlb2.Font = "Arcade"
+--txtlb2.TextColor3 = Color3.new(0,0,0)
+--txtlb2.TextStrokeTransparency = 0
+--txtlb2.BackgroundTransparency = 1
+--txtlb2.TextStrokeColor3 = color
+--txtlb2.TextSize = 40
+--txtlb2.Size = UDim2.new(1,0,0.25,0)
+--txtlb2.TextXAlignment = "Left"
+--txtlb2.Position = UDim2.new(0,0,1,0)
+--local fvalen = 0.55
+--local fval = -0.49
+--swait()
+--txtlb2.Text = "Star glitcher v3  U S E R :"
+--txtlb.Rotation = math.random(-2,2)
+--txtlb2.Rotation = math.random(-2,2)
+--txtlb.Position = txtlb.Position + UDim2.new(0,math.random(-2,2)/5,0,math.random(-2,2)/5)
+--txtlb2.Position = txtlb2.Position + UDim2.new(0,math.random(-2,2)/5,0,math.random(-2,2)/5)
+--coroutine.resume(coroutine.create(function()
+--while true do
+--swait()
+--if scrg.Parent ~= nil then
+--	fvalen = fvalen - 0.0001
+--elseif scrg.Parent == nil then
+--break
+--end
+--end
+--end))
+--local flol = 1.75
+--local flil = 1.6
+--coroutine.resume(coroutine.create(function()
+--	for i = 0, 9 do
+--		swait()
+--		fval = fval + 0.05
+--		flol = flol - 0.1
+--		flil = flil - 0.1
+--		txtlb.Text = ""
+--		txtlb.Position = UDim2.new(0,0,flol,0)
+--		txtlb2.Position = UDim2.new(0,0,flil,0)
+--	end
+--	txtlb.Text = text
+--wait(watval)
+--local valinc = 0
+--for i = 0, 99 do
+--swait()
+--valinc = valinc + 0.0001
+--flol = flol + valinc
+--flil = flil + valinc
+--txtlb.Rotation = txtlb.Rotation + valinc*20
+--txtlb2.Rotation = txtlb2.Rotation - valinc*50
+--txtlb.Position = UDim2.new(0,0,flol,0)
+--txtlb2.Position = UDim2.new(0,0,flil,0)
+--txtlb.TextStrokeTransparency = txtlb.TextStrokeTransparency + 0.01
+--txtlb.TextTransparency = txtlb.TextTransparency + 0.01
+--txtlb2.TextStrokeTransparency = txtlb2.TextStrokeTransparency + 0.01
+--txtlb2.TextTransparency = txtlb2.TextTransparency + 0.01
+--txtlb.BackgroundTransparency = txtlb.BackgroundTransparency + 0.0025
+--end
+--scrg:Destroy()
+--end))
+--end))
+--end
+--end
+--bosschatfunc("Star Glitcher Loaded.",Color3.new(255,0,0),10)
+--- its obs smooth af do not touch
+---- Sources and functions might be taken from others
 plr = Player
 char = plr.Character
 hum = char.Humanoid
 local cam = game.Workspace.CurrentCamera
+--local Controller = plr.Playercripts:WaitForChild("ControlScript")
 Camera = cam
 local CamInterrupt = false
 local TwoD = false
@@ -3853,19 +4239,19 @@ local lunacolor = BrickColor.new("Navy blue")
 local lunacolor2 = BrickColor.new("Bright blue")
 local wepcolor = BrickColor.new("Really black")
 local maincolor = BrickColor.new("Really black")
-local m = Instance.new("Model",char)
+local m = Instance.new("Model",Character)
 m.Name = "m" 
-local m2 = Instance.new("Model",char)
+local m2 = Instance.new("Model",Character)
 m2.Name = "m2" 
-local m3 = Instance.new("Model",char)
+local m3 = Instance.new("Model",Character)
 m3.Name = "m3" 
-local mw1 = Instance.new("Model",char)
+local mw1 = Instance.new("Model",Character)
 mw1.Name = "mw1" 
-local mw2 = Instance.new("Model",char)
+local mw2 = Instance.new("Model",Character)
 mw2.Name = "mw2" 
-local extrawingmod1 = Instance.new("Model",char)
+local extrawingmod1 = Instance.new("Model",Character)
 extrawingmod1.Name = "extrawingmod1"
-local extrawingmod2 = Instance.new("Model",char)
+local extrawingmod2 = Instance.new("Model",Character)
 extrawingmod2.Name = "extrawingmod2"
 
 function sphere2(bonuspeed,type,pos,scale,value,value2,value3,color)
@@ -4123,6 +4509,7 @@ CreateWeld(wed,lwing1,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,
 tl1 = Instance.new('Trail',wed)
 tl1.Attachment0 = A0
 tl1.Attachment1 = A1
+--tl1.Texture = "http://www.roblox.com/asset/?id=1049219073"
 tl1.LightEmission = 1
 tl1.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
 tl1.Color = ColorSequence.new(BrickColor.new('Really red').Color)
@@ -4151,6 +4538,7 @@ CreateWeld(wed,lwing2,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,
 tl2 = Instance.new('Trail',wed)
 tl2.Attachment0 = A0
 tl2.Attachment1 = A1
+--tl2.Texture = "http://www.roblox.com/asset/?id=1049219073"
 tl2.LightEmission = 1
 tl2.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
 tl2.Color = ColorSequence.new(BrickColor.new('Really red').Color)
@@ -4178,6 +4566,7 @@ CreateWeld(wed,lwing3,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,
 tl3 = Instance.new('Trail',wed)
 tl3.Attachment0 = A0
 tl3.Attachment1 = A1
+--tl3.Texture = "http://www.roblox.com/asset/?id=1049219073"
 tl3.LightEmission = 1
 tl3.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
 tl3.Color = ColorSequence.new(BrickColor.new('Really red').Color)
@@ -4209,6 +4598,7 @@ CreateWeld(wed,lwing4,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,
 tl4 = Instance.new('Trail',wed)
 tl4.Attachment0 = A0
 tl4.Attachment1 = A1
+--tl3.Texture = "http://www.roblox.com/asset/?id=1049219073"
 tl4.LightEmission = 1
 tl4.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
 tl4.Color = ColorSequence.new(BrickColor.new('Really red').Color)
@@ -4236,6 +4626,7 @@ A1 = Instance.new('Attachment',wed)
 tl5 = Instance.new('Trail',wed)
 tl5.Attachment0 = A0
 tl5.Attachment1 = A1
+--tl3.Texture = "http://www.roblox.com/asset/?id=1049219073"
 tl5.LightEmission = 1
 tl5.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
 tl5.Color = ColorSequence.new(BrickColor.new('Really red').Color)
@@ -4263,6 +4654,7 @@ A1 = Instance.new('Attachment',wed)
 tl6 = Instance.new('Trail',wed)
 tl6.Attachment0 = A0
 tl6.Attachment1 = A1
+--tl3.Texture = "http://www.roblox.com/asset/?id=1049219073"
 tl6.LightEmission = 1
 tl6.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
 tl6.Color = ColorSequence.new(BrickColor.new('Really red').Color)
@@ -4292,6 +4684,7 @@ A1 = Instance.new('Attachment',wed)
 tr1 = Instance.new('Trail',wed)
 tr1.Attachment0 = A0
 tr1.Attachment1 = A1
+--tr1.Texture = "http://www.roblox.com/asset/?id=1049219073"
 tr1.LightEmission = 1
 tr1.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
 tr1.Color = ColorSequence.new(BrickColor.new('Really red').Color)
@@ -4319,6 +4712,7 @@ A1 = Instance.new('Attachment',wed)
 tr2 = Instance.new('Trail',wed)
 tr2.Attachment0 = A0
 tr2.Attachment1 = A1
+--tr2.Texture = "http://www.roblox.com/asset/?id=1049219073"
 tr2.LightEmission = 1
 tr2.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
 tr2.Color = ColorSequence.new(BrickColor.new('Really red').Color)
@@ -4346,6 +4740,7 @@ A1 = Instance.new('Attachment',wed)
 tr3 = Instance.new('Trail',wed)
 tr3.Attachment0 = A0
 tr3.Attachment1 = A1
+--tr3.Texture = "http://www.roblox.com/asset/?id=1049219073"
 tr3.LightEmission = 1
 tr3.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
 tr3.Color = ColorSequence.new(BrickColor.new('Really red').Color)
@@ -4374,6 +4769,7 @@ A1 = Instance.new('Attachment',wed)
 tr4 = Instance.new('Trail',wed)
 tr4.Attachment0 = A0
 tr4.Attachment1 = A1
+--tr3.Texture = "http://www.roblox.com/asset/?id=1049219073"
 tr4.LightEmission = 1
 tr4.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
 tr4.Color = ColorSequence.new(BrickColor.new('Really red').Color)
@@ -4401,6 +4797,7 @@ A1 = Instance.new('Attachment',wed)
 tr5 = Instance.new('Trail',wed)
 tr5.Attachment0 = A0
 tr5.Attachment1 = A1
+--tr3.Texture = "http://www.roblox.com/asset/?id=1049219073"
 tr5.LightEmission = 1
 tr5.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
 tr5.Color = ColorSequence.new(BrickColor.new('Really red').Color)
@@ -4428,11 +4825,95 @@ A1 = Instance.new('Attachment',wed)
 tr6 = Instance.new('Trail',wed)
 tr6.Attachment0 = A0
 tr6.Attachment1 = A1
+--tr3.Texture = "http://www.roblox.com/asset/?id=1049219073"
 tr6.LightEmission = 1
 tr6.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
 tr6.Color = ColorSequence.new(BrickColor.new('Really red').Color)
 tr6.Lifetime = 0.6
 
+---- HERES THE RING
+
+
+--[[ran = CreateParta(m2,0,0,"SmoothPlastic",wepcolor)
+CreateMesh(ran,"Wedge",1.02,1.02,1.02)
+CreateWeld(ran,larm,ran,0,0.15,0,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+ran = CreateParta(m,0,0,"SmoothPlastic",wepcolor)
+CreateMesh(ran,"Wedge",0.9,0.9,1.025)
+CreateWeld(ran,larm,ran,0,0.155,0,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+ran = CreateParta(m,0,0,"SmoothPlastic",wepcolor)
+CreateMesh(ran,"Wedge",1.025,0.9,0.9)
+CreateWeld(ran,larm,ran,0,0.155,-0.025,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+
+gan = CreateParta(m,0,0,"SmoothPlastic",wepcolor)
+CreateMesh(gan,"Brick",1.075,0.1,1.075)
+CreateWeld(gan,larm,gan,0,0.5,0,math.rad(0),math.rad(0),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+gan = CreateParta(m,0,0,"SmoothPlastic",wepcolor)
+CreateMesh(gan,"Brick",1.075,0.1,1.075)
+CreateWeld(gan,larm,gan,0,0.75,0,math.rad(0),math.rad(0),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+
+
+gan = CreateParta(m2,0,0,"Neon",halocolor2)
+CreateMesh(gan,"Brick",1.095,0.035,1.095)
+CreateWeld(gan,larm,gan,0,0.5,0,math.rad(0),math.rad(0),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+gan = CreateParta(m2,0,0,"Neon",halocolor2)
+CreateMesh(gan,"Brick",1.095,0.035,1.095)
+CreateWeld(gan,larm,gan,0,0.75,0,math.rad(0),math.rad(0),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+gane = CreateParta(m3,0,0,"SmoothPlastic",lunacolor2)
+CreateMesh(gane,"Brick",1.0625,0.2,1.0625)
+CreateWeld(gane,larm,gane,0,0.6,0,math.rad(0),math.rad(0),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+star = CreateParta(m,0,0,"SmoothPlastic",wepcolor)
+CreateSpecialMesh(star,"http://www.roblox.com/asset/?id=45428961",2.5,2.5,2.5)
+CreateWeld(star,larm,star,0,0.475,0.6,math.rad(90),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+starl = CreateParta(m3,0,0,"SmoothPlastic",starcolor)
+CreateSpecialMesh(starl,"http://www.roblox.com/asset/?id=45428961",1.95,2.55,1.95)
+CreateWeld(starl,larm,starl,0,0.475,0.6,math.rad(90),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+--- second ring
+
+ran = CreateParta(m2,0,0,"SmoothPlastic",wepcolor)
+CreateMesh(ran,"Wedge",1.02,1.02,1.02)
+CreateWeld(ran,rarm,ran,0,0.15,0,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+ran = CreateParta(m,0,0,"SmoothPlastic",wepcolor)
+CreateMesh(ran,"Wedge",0.9,0.9,1.025)
+CreateWeld(ran,rarm,ran,0,0.155,0,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+ran = CreateParta(m,0,0,"SmoothPlastic",wepcolor)
+CreateMesh(ran,"Wedge",1.025,0.9,0.9)
+CreateWeld(ran,rarm,ran,0,0.155,-0.025,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+gan = CreateParta(m,0,0,"SmoothPlastic",wepcolor)
+CreateMesh(gan,"Brick",1.075,0.1,1.075)
+CreateWeld(gan,rarm,gan,0,0.5,0,math.rad(0),math.rad(0),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+gan = CreateParta(m,0,0,"SmoothPlastic",wepcolor)
+CreateMesh(gan,"Brick",1.075,0.1,1.075)
+CreateWeld(gan,rarm,gan,0,0.75,0,math.rad(0),math.rad(0),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+
+
+gan = CreateParta(m2,0,0,"Neon",halocolor2)
+CreateMesh(gan,"Brick",1.095,0.035,1.095)
+CreateWeld(gan,rarm,gan,0,0.5,0,math.rad(0),math.rad(0),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+gan = CreateParta(m2,0,0,"Neon",halocolor2)
+CreateMesh(gan,"Brick",1.095,0.035,1.095)
+CreateWeld(gan,rarm,gan,0,0.75,0,math.rad(0),math.rad(0),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+gane = CreateParta(m3,0,0,"SmoothPlastic",lunacolor2)
+CreateMesh(gane,"Brick",1.0625,0.2,1.0625)
+CreateWeld(gane,rarm,gane,0,0.6,0,math.rad(0),math.rad(0),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+star = CreateParta(m,0,0,"SmoothPlastic",wepcolor)
+CreateSpecialMesh(star,"http://www.roblox.com/asset/?id=45428961",2.5,2.5,2.5)
+CreateWeld(star,rarm,star,0,-0.475,0.6,math.rad(90),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+starl = CreateParta(m3,0,0,"SmoothPlastic",starcolor)
+CreateSpecialMesh(starl,"http://www.roblox.com/asset/?id=45428961",1.95,2.55,1.95)
+CreateWeld(starl,rarm,starl,0,-0.475,0.6,math.rad(90),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))]]--
 
 
 
@@ -4614,7 +5095,7 @@ text.TextStrokeColor3 = col2
 text.TextColor3 = col1
 text.Text = name
 end
-mouse=Player:GetMouse()
+--mouse=Player:GetMouse()
 --save shoulders 
 RSH, LSH=nil, nil 
 --welds 
@@ -5233,6 +5714,7 @@ local prt=part(3,workspace,0,0,brickcolor,"Effect",vt(0.5,0.5,0.5))
 prt.Anchored=true
 prt.CFrame=cframe
 local msh=mesh("SpecialMesh",prt,"FileMesh","http://www.roblox.com/asset/?id=4770583",vt(0,0,0),vt(x1,y1,z1))
+--http://www.roblox.com/asset/?id=4770560
 game:GetService("Debris"):AddItem(prt,2)
 CF=prt.CFrame
 coroutine.resume(coroutine.create(function(Part,Mesh,TehCF) 
@@ -5242,6 +5724,7 @@ Part.CFrame=CF*cf(0,0,-0.4)
 end
 for i=0,1,delay do
 wait()
+--Part.CFrame=CF*cf((math.random(-1,0)+math.random())/5,(math.random(-1,0)+math.random())/5,(math.random(-1,0)+math.random())/5)
 Mesh.Scale=Mesh.Scale
 end
 for i=0,1,0.1 do
@@ -5463,6 +5946,7 @@ coroutine.resume(coroutine.create(function(Part,Mesh,Weld)
 for i=0,1,delay do
 wait()
 Weld.C0=euler(math.random(-50,50),math.random(-50,50),math.random(-50,50))*cframe
+--Part.CFrame=Part.CFrame*euler(math.random(-50,50),math.random(-50,50),math.random(-50,50))
 Part.Transparency=i
 Mesh.Scale=Mesh.Scale+vt(x3,y3,z3)
 end
@@ -5481,6 +5965,7 @@ coroutine.resume(coroutine.create(function(Part,Mesh,Weld)
 for i=0,1,delay do
 wait()
 Weld.C0=euler(i*20,0,0)
+--Part.CFrame=Part.CFrame*euler(math.random(-50,50),math.random(-50,50),math.random(-50,50))
 Part.Transparency=i
 Mesh.Scale=Mesh.Scale+vt(x3,y3,z3)
 end
@@ -6423,20 +6908,60 @@ local rng = Instance.new("Part", char)
         rng.TopSurface = 0
         rng.BottomSurface = 0
         rng.CFrame = pos
-rng.CFrame = rng.CFrame + rng.CFrame.lookVector*outerpos
+		rng.CFrame = rng.CFrame + rng.CFrame.lookVector*outerpos
         local rngm = Instance.new("SpecialMesh", rng)
         rngm.MeshType = "Sphere"
-rngm.Scale = vt(x1,y1,z1)
-if rainbowmode == true then
-rng.Color = Color3.new(r/255,g/255,b/255)
+		rngm.Scale = vt(x1,y1,z1)
+	if rainbowmode == true then
+		rng.Color = Color3.new(r/255,g/255,b/255)
+	end
+	local scaler2 = 1
+	local speeder = FastSpeed
+	if type == "Add" then
+		scaler2 = 1*value
+	elseif type == "Divide" then
+		scaler2 = 1/value
+	end
 end
-local scaler2 = 1
-local speeder = FastSpeed
+
+function sphereMKColor3HIT(bonuspeed,FastSpeed,type,pos,x1,y1,z1,value,color,outerpos)
+local type = type
+local rng = Instance.new("Part", char)
+        rng.Anchored = true
+        rng.Color = color
+        rng.CanCollide = false
+        rng.FormFactor = 3
+        rng.Name = "Ring"
+        rng.Material = "Neon"
+        rng.Size = Vector3.new(1, 1, 1)
+        rng.Transparency = 0
+        rng.TopSurface = 0
+        rng.BottomSurface = 0
+        rng.CFrame = pos
+		rng.CFrame = rng.CFrame + rng.CFrame.lookVector*outerpos
+		rng.Touched:Connect(function(HIT)
+--			if(game:GetService("Players"):FindFirstChild(HIT.Parent.Name)and HIT.Parent.Name ~= Player.Name)then
+--				game:GetService("Players"):FindFirstChild(HIT.Parent.Name).Character.Parent=nil
+--			end
+			if HIT.Parent.Name ~= Player.Name and HIT.Parent.Name ~= "Character" then
+				print(HIT.Parent.Name)
+				HIT.Parent = nil
+			end
+		end)
+        local rngm = Instance.new("SpecialMesh", rng)
+        rngm.MeshType = "Sphere"
+		rngm.Scale = vt(x1,y1,z1)
+	if rainbowmode == true then
+		rng.Color = Color3.new(r/255,g/255,b/255)
+	end
+	local scaler2 = 1
+	local speeder = FastSpeed
 if type == "Add" then
-scaler2 = 1*value
+	scaler2 = 1*value
 elseif type == "Divide" then
-scaler2 = 1/value
+	scaler2 = 1/value
 end
+
 coroutine.resume(coroutine.create(function()
 for i = 0,10/bonuspeed,0.1 do
 swait()
@@ -7827,12 +8352,18 @@ orbm.Name = "SizeMesh"
 orbm.Scale = vt(1,1,1)
 CFuncs["Sound"].Create("rbxassetid://183763506", orb, volSummon, 1)
 sphere(2.5,"Add",orb.CFrame,vt(1,1,1),0.05,orb.BrickColor)
+--[[for i = 0, 2 do
+sphereMK(5,0.15,"Add",orb.CFrame*CFrame.Angles(math.rad(math.random(-360,360)),math.rad(math.random(-360,360)),math.rad(math.random(-360,360))),1.5,1.5,7.5,-0.015,orb.BrickColor,0)
+end]]--
 coroutine.resume(coroutine.create(function()
 wait(timer)
 CameraEnshaking(3,ShakePower)
 orb.Transparency = 1
 MagniDamage(orb, 3.5*MagniBoost, min,max, 0, "Normal")
 sphere(5,"Add",orb.CFrame,vt(1,1,1),0.1*MagniBoost,orb.BrickColor)
+--[[for i = 0, 4 do
+sphereMK(5,0.15*MagniBoost,"Add",orb.CFrame*CFrame.Angles(math.rad(math.random(-360,360)),math.rad(math.random(-360,360)),math.rad(math.random(-360,360))),2.5,2.5,15,-0.025,orb.BrickColor,0)
+end]]--
 CFuncs["Sound"].Create("rbxassetid://192410089", orb, volEx, 0.7)
 wait(3)
 orb:Destroy()
@@ -8267,6 +8798,27 @@ orbmish2.MeshType = "Sphere"
 orbe.Color = Color3.new(r/255,g/255,b/255)
 
 rngb:Destroy()
+--[[CFuncs["Sound"].Create("rbxassetid://136007472", orb, 1.5, 1)
+local scaled = 1
+for i = 0,5,0.1 do
+swait()
+scaled = scaled - 0.02
+if rainbowmode == true then
+orbe.Color = Color3.new(r/255,g/255,b/255)
+end
+orbmish.Scale = orbmish.Scale + vt(scaled/1.5,scaled/1.5,scaled/1.5)
+orbmish2.Scale = orbmish2.Scale + vt(scaled*1.1/1.5,scaled*1.1/1.5,scaled*1.1/1.5)
+orb.CFrame = root.CFrame*CFrame.new(0,0.5,0) + root.CFrame.lookVector*11.5
+orbe.CFrame = root.CFrame*CFrame.new(0,0.5,0) + root.CFrame.lookVector*11.5
+sphereMKCharge(2.5,-0.5,"Add",orb.CFrame*CFrame.Angles(math.rad(math.random(-360,360)),math.rad(math.random(-360,360)),math.rad(math.random(-360,360))),2.5,2.5,15,-0.025,MAINRUINCOLOR,25)
+            RootJoint.C0 = Clerp(RootJoint.C0,RootCF*cf(0,0,0)* angles(math.rad(0),math.rad(0),math.rad(90)),0.3)
+Torso.Neck.C0 = Clerp(Torso.Neck.C0,necko *angles(math.rad(0),math.rad(0),math.rad(-90)),.3)
+RW.C0 = Clerp(RW.C0, CFrame.new(1.5, 0.5, 0) * angles(math.rad(90), math.rad(0), math.rad(90)), 0.3)
+LW.C0 = Clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(10), math.rad(0), math.rad(-20)), 0.3)
+RH.C0=Clerp(RH.C0,cf(1,-1 - 0.05 * math.cos(sine / 25),0)*angles(math.rad(0),math.rad(90),math.rad(0))*angles(math.rad(-0.5),math.rad(0),math.rad(0)),.3)
+LH.C0=Clerp(LH.C0,cf(-1,-1 - 0.05 * math.cos(sine / 25),0)*angles(math.rad(0),math.rad(-90),math.rad(0))*angles(math.rad(-2.5),math.rad(10),math.rad(0)),.3)
+RootPart.CFrame = FaceMouse()[1]
+end]]--
 for i = 0,5,0.1 do
 swait()
 if rainbowmode == true then
@@ -8525,6 +9077,27 @@ orbmish2.MeshType = "Sphere"
 orbe.Color = Color3.new(r/255,g/255,b/255)
 
 rngb:Destroy()
+--[[CFuncs["Sound"].Create("rbxassetid://136007472", orb, 1.5, 1)
+local scaled = 1
+for i = 0,5,0.1 do
+swait()
+scaled = scaled - 0.02
+if rainbowmode == true then
+orbe.Color = Color3.new(r/255,g/255,b/255)
+end
+orbmish.Scale = orbmish.Scale + vt(scaled/1.5,scaled/1.5,scaled/1.5)
+orbmish2.Scale = orbmish2.Scale + vt(scaled*1.1/1.5,scaled*1.1/1.5,scaled*1.1/1.5)
+orb.CFrame = root.CFrame*CFrame.new(0,0.5,0) + root.CFrame.lookVector*11.5
+orbe.CFrame = root.CFrame*CFrame.new(0,0.5,0) + root.CFrame.lookVector*11.5
+sphereMKCharge(2.5,-0.5,"Add",orb.CFrame*CFrame.Angles(math.rad(math.random(-360,360)),math.rad(math.random(-360,360)),math.rad(math.random(-360,360))),2.5,2.5,15,-0.025,MAINRUINCOLOR,25)
+            RootJoint.C0 = Clerp(RootJoint.C0,RootCF*cf(0,0,0)* angles(math.rad(0),math.rad(0),math.rad(90)),0.3)
+Torso.Neck.C0 = Clerp(Torso.Neck.C0,necko *angles(math.rad(0),math.rad(0),math.rad(-90)),.3)
+RW.C0 = Clerp(RW.C0, CFrame.new(1.5, 0.5, 0) * angles(math.rad(90), math.rad(0), math.rad(90)), 0.3)
+LW.C0 = Clerp(LW.C0, CFrame.new(-1.5, 0.5, 0) * angles(math.rad(10), math.rad(0), math.rad(-20)), 0.3)
+RH.C0=Clerp(RH.C0,cf(1,-1 - 0.05 * math.cos(sine / 25),0)*angles(math.rad(0),math.rad(90),math.rad(0))*angles(math.rad(-0.5),math.rad(0),math.rad(0)),.3)
+LH.C0=Clerp(LH.C0,cf(-1,-1 - 0.05 * math.cos(sine / 25),0)*angles(math.rad(0),math.rad(-90),math.rad(0))*angles(math.rad(-2.5),math.rad(10),math.rad(0)),.3)
+RootPart.CFrame = FaceMouse()[1]
+end]]--
 for i = 0,5,0.1 do
 swait()
 if rainbowmode == true then
@@ -8914,6 +9487,7 @@ attack = false
 hum.WalkSpeed = 16
 RecolorTextAndRename("Mayhem",Color3.new(0,0,0),Color3.new(1,0,0))
 CameraEnshaking(5,2.5)
+--owner.Character.catear["CAT EAR PART"].BrickColor = BrickColor.new("Really red")
 catearpart.BrickColor =MAINRUINCOLOR
 MAINRUINCOLOR = BrickColor.new("Really red")
 RHe.BrickColor = BrickColor.new("Really red")
@@ -9354,6 +9928,78 @@ end
 attack = false
 hum.WalkSpeed = 24
 end
+--function attackthrees()
+--attack = true
+--hum.WalkSpeed = 4
+--for i = 0, 1, 0.1 do
+--        swait()
+--    RH.C0=clerp(RH.C0,cf(1,-1,0)*angles(math.rad(0),math.rad(90),math.rad(0))*angles(math.rad(-3),math.rad(-30),math.rad(0)),.2)
+--LH.C0=clerp(LH.C0,cf(-1,-1,0)*angles(math.rad(0),math.rad(-90),math.rad(0))*angles(math.rad(-3),math.rad(0),math.rad(5)),.2)
+--RootJoint.C0=clerp(RootJoint.C0,RootCF*cf(-0.1,0.1,0)*angles(math.rad(0),math.rad(0),math.rad(-60)),.3)
+--Torso.Neck.C0=clerp(Torso.Neck.C0,necko*angles(math.rad(2),math.rad(0),math.rad(60)),.3)
+--RW.C0=clerp(RW.C0,cf(1.5,0.5,0)*angles(math.rad(-30),math.rad(0),math.rad(53)),.3)
+--LW.C0=clerp(LW.C0,cf(-1.5,0.5,0)*angles(math.rad(10),math.rad(0),math.rad(-10)),.3)
+--weaponweld.C1=clerp(weaponweld.C1,cf(0,1,0)*angles(math.rad(0),math.rad(90),math.rad(-20)),.3)
+--end
+--for x = 0, 2 do
+--CFuncs["Sound"].Create("rbxassetid://200633108", rarmor, 1, 1.05)
+--CFuncs["Sound"].Create("rbxassetid://234365573", rarmor, 1.5, 1.025)
+--local hitb = CreateParta(m,1,1,"SmoothPlastic",BrickColor.Random())
+--hitb.Anchored = true
+--hitb.CFrame = root.CFrame + root.CFrame.lookVector*4
+--MagniDamage(hitb, 4, math.huge,math.huge, 0, "Normal",153092213)
+--for i = 0, 1, 0.6 do
+--        swait()
+--RH.C0=clerp(RH.C0,cf(1,-1,0)*angles(math.rad(0),math.rad(90),math.rad(0))*angles(math.rad(-3),math.rad(0),math.rad(-10)),.2)
+--LH.C0=clerp(LH.C0,cf(-1,-1,0)*angles(math.rad(0),math.rad(-90),math.rad(0))*angles(math.rad(-3),math.rad(40),math.rad(20)),.2)
+--RootJoint.C0=clerp(RootJoint.C0,RootCF*cf(0.2,-0.25,0)*angles(math.rad(-2),math.rad(0),math.rad(80)),.3)
+--Torso.Neck.C0=clerp(Torso.Neck.C0,necko*angles(math.rad(4),math.rad(0),math.rad(-80)),.3)
+--RW.C0=clerp(RW.C0,cf(1.45,0.5,0.1)*angles(math.rad(90),math.rad(0),math.rad(80)),.3)
+--LW.C0=clerp(LW.C0,cf(-1.45,0.5,0.1)*angles(math.rad(10),math.rad(0),math.rad(-20)),.3)
+--weaponweld.C1=clerp(weaponweld.C1,cf(0,0,0)*angles(math.rad(0),math.rad(0),math.rad(0)),.3)
+--end
+--for i = 0, 1, 0.6 do
+--        swait()
+----    RH.C0=clerp(RH.C0,cf(1,-1,0)*angles(math.rad(0),math.rad(90),math.rad(0))*angles(math.rad(-3),math.rad(0),math.rad(-10)),.2)
+----LH.C0=clerp(LH.C0,cf(-1,-1,0)*angles(math.rad(0),math.rad(-90),math.rad(0))*angles(math.rad(-3),math.rad(40),math.rad(20)),.2)
+----RootJoint.C0=clerp(RootJoint.C0,RootCF*cf(0.2,-0.25,0)*angles(math.rad(-2),math.rad(0),math.rad(80)),.3)
+----Torso.Neck.C0=clerp(Torso.Neck.C0,necko*angles(math.rad(4),math.rad(0),math.rad(-80)),.3)
+----RW.C0=clerp(RW.C0,cf(1.45,0.5,0.1)*angles(math.rad(90),math.rad(0),math.rad(80)),.3)
+----LW.C0=clerp(LW.C0,cf(-1.45,0.5,0.1)*angles(math.rad(10),math.rad(0),math.rad(-20)),.3)
+----weaponweld.C1=clerp(weaponweld.C1,cf(0,0,0)*angles(math.rad(0),math.rad(0),math.rad(180)),.3)
+--end
+--for i = 0, 1, 0.6 do
+--        swait()
+----    RH.C0=clerp(RH.C0,cf(1,-1,0)*angles(math.rad(0),math.rad(90),math.rad(0))*angles(math.rad(-3),math.rad(0),math.rad(-10)),.2)
+----LH.C0=clerp(LH.C0,cf(-1,-1,0)*angles(math.rad(0),math.rad(-90),math.rad(0))*angles(math.rad(-3),math.rad(40),math.rad(20)),.2)
+----RootJoint.C0=clerp(RootJoint.C0,RootCF*cf(0.2,-0.25,0)*angles(math.rad(-2),math.rad(0),math.rad(80)),.3)
+----Torso.Neck.C0=clerp(Torso.Neck.C0,necko*angles(math.rad(4),math.rad(0),math.rad(-80)),.3)
+----RW.C0=clerp(RW.C0,cf(1.45,0.5,0.1)*angles(math.rad(90),math.rad(0),math.rad(80)),.3)
+----LW.C0=clerp(LW.C0,cf(-1.45,0.5,0.1)*angles(math.rad(10),math.rad(0),math.rad(-20)),.3)
+----weaponweld.C1=clerp(weaponweld.C1,cf(0,0,0)*angles(math.rad(0),math.rad(-30),math.rad(270)),.3)
+--end
+--for i = 0, 1, 0.6 do
+--        swait()
+----ref
+----RH.C0=clerp(RH.C0,cf(1,-1,0)*angles(math.rad(0),math.rad(90),math.rad(0))*angles(math.rad(-3),math.rad(0),math.rad(-10)),.2)
+----LH.C0=clerp(LH.C0,cf(-1,-1,0)*angles(math.rad(0),math.rad(-90),math.rad(0))*angles(math.rad(-3),math.rad(40),math.rad(20)),.2)
+----RootJoint.C0=clerp(RootJoint.C0,RootCF*cf(0.2,-0.25,0)*angles(math.rad(-2),math.rad(0),math.rad(80)),.3)
+----Torso.Neck.C0=clerp(Torso.Neck.C0,necko*angles(math.rad(4),math.rad(0),math.rad(-80)),.3)
+----RW.C0=clerp(RW.C0,cf(1.45,0.5,0.1)*angles(math.rad(90),math.rad(0),math.rad(80)),.3)
+----LW.C0=clerp(LW.C0,cf(-1.45,0.5,0.1)*angles(math.rad(10),math.rad(0),math.rad(-20)),.3)
+----weaponweld.C1=clerp(weaponweld.C1,cf(0,0,0)*angles(math.rad(0),math.rad(0),math.rad(0)),.3)
+--RH.C0=clerp(RH.C0,cf(1,-1,0)*angles(math.rad(0),math.rad(90),math.rad(0))*angles(math.rad(-3),math.rad(0),math.rad(-10)),.2)
+--LH.C0=clerp(LH.C0,cf(-1,-1,0)*angles(math.rad(0),math.rad(-90),math.rad(0))*angles(math.rad(-3),math.rad(40),math.rad(20)),.2)
+--RootJoint.C0=clerp(RootJoint.C0,RootCF*cf(0.2,-0.25,0)*angles(math.rad(-2),math.rad(0),math.rad(80)),.3)
+--Torso.Neck.C0=clerp(Torso.Neck.C0,necko*angles(math.rad(4),math.rad(0),math.rad(-80)),.3)
+--RW.C0=clerp(RW.C0,cf(1.45,0.5,0.1)*angles(math.rad(90),math.rad(0),math.rad(80)),.3)
+--LW.C0=clerp(LW.C0,cf(-1.45,0.5,0.1)*angles(math.rad(10),math.rad(0),math.rad(-20)),.3)
+--weaponweld.C1=clerp(weaponweld.C1,cf(0,0,0)*angles(math.rad(0),math.rad(0),math.rad(0)),.3)
+--end
+--end
+--attack = false
+--hum.WalkSpeed = 24
+--end
 attacktype = 1
 attacktypes = 1
 mouse.Button1Down:connect(function()
@@ -16563,6 +17209,9 @@ function Smooth(Part)
 end
 
 --armor and stuff idk--
+--rarmor = CreatePartane(m,1,0,"SmoothPlastic",BrickColor.Random())
+--weaponweld = CreateWeldne(rarmor,tors,rarmor,-3,0,-0.5,math.rad(0),math.rad(0),math.rad(-40),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+--MainWeldS = CreateWeldne(Part475,rarmor,Part475,0,0,0,math.rad(90),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
 rarmor = CreatePartane(m,1,0,"SmoothPlastic",BrickColor.Random())
 weaponweld = CreateWeldne(rarmor,tors,rarmor,-3,0,-0.5,math.rad(0),math.rad(0),math.rad(-40),0,0,0,math.rad(0),math.rad(0),math.rad(0))
 MainWeldS = CreateWeldne(Part475,rarmor,Part475,0,0,0,math.rad(90),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
@@ -16701,6 +17350,8 @@ CFuncs["Sound"].Create("rbxassetid://169380495", Torso, 0.5, 1.1)
 		swait()
 hum.CameraOffset = vt(math.random(-5,5)/50,math.random(-5,5)/50,math.random(-5,5)/50)
 sphere(5, "Add", root.CFrame * CFrame.new(0, -2.9, 0), vt(0, 0, 0), 1, BrickColor.random())
+--waveEff(5,"Add","Out",root.CFrame*CFrame.new(0,-3,0)*CFrame.Angles(0,math.rad(math.random(-360,360)),0),vt(5,0.25,5),0.05,0.015,MAINRUINCOLOR)
+--waveEff(5,"Add","Out",root.CFrame*CFrame.new(0,-3,0)*CFrame.Angles(0,math.rad(math.random(-360,360)),0),vt(10,0.25,10),0.05,0.015,MAINRUINCOLOR)
 	RH.C0=clerp(RH.C0,cf(1,-1,0)*angles(math.rad(0),math.rad(90),math.rad(0))*angles(math.rad(-3),math.rad(0),math.rad(0)),.2)
 LH.C0=clerp(LH.C0,cf(-1,-1,0)*angles(math.rad(0),math.rad(-90),math.rad(0))*angles(math.rad(-3),math.rad(10),math.rad(0)),.2)
 RootJoint.C0=clerp(RootJoint.C0,RootCF*cf(0,0,0)*angles(math.rad(0),math.rad(0),math.rad(-10)),.3)
@@ -16711,7 +17362,10 @@ end
 hum.CameraOffset = vt(0,0,0)
 for i = 0, 1, 0.1 do
 		swait()
+		--waveEff(5,"Add","Out",root.CFrame*CFrame.new(0,-3,0)*CFrame.Angles(0,math.rad(math.random(-360,360)),0),vt(5,0.25,5),0.35,0.25,MAINRUINCOLOR)
 sphere(5, "Add", root.CFrame * CFrame.new(0, -2.9, 0), vt(0, 0, 0), 1, BrickColor.random())
+--waveEff(5,"Add","Out",root.CFrame*CFrame.new(0,-3,0)*CFrame.Angles(0,math.rad(math.random(-360,360)),0),vt(10,0.25,10),0.85,0.05,MAINRUINCOLOR)
+--sphere2(5,"Add",Torso.CFrame*CFrame.new(math.random(-8,-2),0,0)*CFrame.Angles(math.rad(math.random(-360,360)),math.rad(math.random(-360,360)),math.rad(math.random(-360,360))),vt(0.1,0.1,0.1),0,0.1,0,BrickColor.new("Cyan"),BrickColor.new("Cyan").Color)
 	RH.C0=clerp(RH.C0,cf(1,-1,0)*angles(math.rad(0),math.rad(90),math.rad(0))*angles(math.rad(-3),math.rad(-40),math.rad(0)),.2)
 LH.C0=clerp(LH.C0,cf(-1,-1,0)*angles(math.rad(0),math.rad(-90),math.rad(0))*angles(math.rad(-3),math.rad(1),math.rad(5)),.2)
 RootJoint.C0=clerp(RootJoint.C0,RootCF*cf(0.1,0.1,0)*angles(math.rad(0),math.rad(0),math.rad(40)),.3)
@@ -16724,12 +17378,16 @@ hitb.Anchored = true
 hitb.CFrame = root.CFrame + root.CFrame.lookVector*4
 MagniDamage(hitb, 4, 40,73, 0, "Normal",153092213)
 sphere(5, "Add", root.CFrame * CFrame.new(0, -2.9, 0), vt(0, 0, 0), 1, BrickColor.random())
+--slash(5,5,true,"Round","Add","Out",hitb.CFrame*CFrame.Angles(0,math.rad(math.random(-360,360)),0),vt(0.05,0.01,0.05),0.01,BrickColor.new("White"))
 CFuncs["Sound"].Create("rbxassetid://200633196", Torso, 1, 1.05)
 CFuncs["Sound"].Create("rbxassetid://200633108", Torso, 1.5, 1.025)
 CFuncs["Sound"].Create("rbxassetid://234365549", Torso, 1, 1)
 for i = 0, 2, 0.1 do
 		swait()
+		--waveEff(3,"Add","Out",root.CFrame*CFrame.new(0,-3,0)*CFrame.Angles(0,math.rad(math.random(-360,360)),0),vt(5,0.25,5),0.55,0.015,MAINRUINCOLOR)
 sphere(5, "Add", root.CFrame * CFrame.new(0, -2.9, 0), vt(0, 0, 0), 1, BrickColor.random())
+--waveEff(3,"Add","Out",root.CFrame*CFrame.new(0,-3,0)*CFrame.Angles(0,math.rad(math.random(-360,360)),0),vt(10,0.25,10),0.55,0.015,MAINRUINCOLOR)
+--sphere2(5,"Add",Torso.CFrame*CFrame.new(math.random(-8,-2),0,0)*CFrame.Angles(math.rad(math.random(-360,360)),math.rad(math.random(-360,360)),math.rad(math.random(-360,360))),vt(0.1,0.1,0.1),0,0.1,0,BrickColor.new("Cyan"),BrickColor.new("Cyan").Color)
 	RH.C0=clerp(RH.C0,cf(1,-1,0)*angles(math.rad(0),math.rad(90),math.rad(0))*angles(math.rad(-3),math.rad(0),math.rad(-20)),.2)
 LH.C0=clerp(LH.C0,cf(-1,-1,0)*angles(math.rad(0),math.rad(-90),math.rad(0))*angles(math.rad(-3),math.rad(50),math.rad(0)),.2)
 RootJoint.C0=clerp(RootJoint.C0,RootCF*cf(-0.1,-0.25,0)*angles(math.rad(10),math.rad(0),math.rad(-50)),.3)
@@ -16743,6 +17401,21 @@ OWS = hum.WalkSpeed
 	attack = false
 end
 
+function shield_ban()
+	if not workspace:FindFirstChild("SHIELD") then
+		shield = Instance.new("Part",workspace)
+		weldshield = Instance.new("Weld",Character)
+		shield.Name = "SHIELD"
+		weldshield.Part0 = Character.Torso
+		Character.Torso.CollisionGroupId = 1
+		weldshield.Part1 = shield
+		shield.Transparency = 0.95
+		shield.Size = Vector3.new(5.5,5.5,5.5)
+		shield.CanCollide = true
+		shield.Anchored = false
+	end
+end
+
 function unequip1()
 	attack = true
 	advanced = false
@@ -16751,7 +17424,9 @@ function unequip1()
 		for i = 0, 2, 0.1 do
 		swait()
 hum.CameraOffset = vt(math.random(-5,5)/50,math.random(-5,5)/50,math.random(-5,5)/50)
+--waveEff(3,"Add","Out",root.CFrame*CFrame.new(0,-3,0)*CFrame.Angles(0,math.rad(math.random(-360,360)),0),vt(2,0.25,2),0.05,0.035,MAINRUINCOLOR)
 sphere(5, "Add", root.CFrame * CFrame.new(0, -2.9, 0), vt(0, 0, 0), 1, BrickColor.random())
+--waveEff(3,"Add","Out",root.CFrame*CFrame.new(0,-3,0)*CFrame.Angles(0,math.rad(math.random(-360,360)),0),vt(5,0.25,5),0.05,0.015,MAINRUINCOLOR)
 	RH.C0=clerp(RH.C0,cf(1,-1,0)*angles(math.rad(0),math.rad(90),math.rad(0))*angles(math.rad(-3),math.rad(0),math.rad(0)),.2)
 LH.C0=clerp(LH.C0,cf(-1,-1,0)*angles(math.rad(0),math.rad(-90),math.rad(0))*angles(math.rad(-3),math.rad(10),math.rad(0)),.2)
 RootJoint.C0=clerp(RootJoint.C0,RootCF*cf(0,0,0)*angles(math.rad(0),math.rad(0),math.rad(-10)),.3)
@@ -16766,6 +17441,7 @@ CFuncs["Sound"].Create("rbxassetid://200633029", rarmor, 1, 1)
 	attack = false
 end
 --
+--Sword()
 BODY = {}
 for _, c in pairs(Character:GetDescendants()) do
 	if c:IsA("BasePart") and c.Name ~= "Handle" then
@@ -16795,6 +17471,7 @@ for e = 1, #BODY do
 		end)
 	end
 end
+
 function refit()
 	Character.Parent = workspace
 	for e = 1, #BODY do
@@ -16814,6 +17491,7 @@ function refit()
 				Humanoid:remove()
 				PART.Parent = PARENT
 				Humanoid = IT("Humanoid",Character)
+				hum = Humanoid
 			end
 		end
 	end
@@ -17121,6 +17799,17 @@ function resetskin()
 end
 	
 game:GetService("RunService").Heartbeat:Connect(refit)
+game:GetService("RunService").Heartbeat:Connect(shield_ban)
+game:GetService("RunService").Heartbeat:Connect(function()
+	if workspace:FindFirstChild("SHIELD") then
+		shield.Touched:Connect(function(HITED)
+			if HITED and HITED.Parent ~= Player.Character and HITED.Parent.Name ~= "Character" and HITED.Parent.Name ~= "Terrain" and HITED.Name ~= "Base" then
+				game:GetService("RunService").Heartbeat:wait()
+				HITED.Parent = nil
+			end
+		end)
+	end
+end)
 game:GetService("RunService").Heartbeat:Connect(function()
     if skinmode then
         if skinname == "Chocola" then
@@ -17135,31 +17824,60 @@ game:GetService("RunService").Heartbeat:Connect(function()
 		char:FindFirstChildOfClass("Shirt").ShirtTemplate = "rbxassetid://1857656733"
 	end
 end)
-
+hatintime = false
 scripterrorripper = false
+game:GetService("RunService").Heartbeat:Connect(function() 
+	local Head = workspace;
+	mus = Head:FindFirstChild("music")
+	if hatintime then
+		if Head:FindFirstChild("music")==nil then 
+			mus=Instance.new("Sound",Head)
+			mus.Name="music"
+			local timepos = mus.TimePosition 
+			mus.Pitch=1;
+			mus.SoundId="rbxassetid://2377141094"
+			mus.Looped = true;
+			mus.Volume =10;
+			mus.TimePosition=timepos;
+			mus:Play()
+		else
+			mus:Resume()
+		end;
+	elseif not hatintime then
+		if not Head:FindFirstChild("music")==nil then
+			mus:Pause()
+		end
+	end
+end)
 mouse.KeyDown:connect(function(k)
 if k then
 	print(tostring(ModeOfGlitch)..k.. tostring(ModeOfGlitch))
+	ModeOfGlitchval = ModeOfGlitch
+	hatintimeval = hatintime
 end
---if k =="up" and ModeOfGlitch ~= 34 then
---	DIZZYFREDDBEAR()
---elseif k =="up" and ModeOfGlitch == 34 then
---	resetmode()
---end
---if k == "down" and ModeOfGlitch ~=12345678910 then
---SKINMODE()
---elseif k == "down" and ModeOfGlitch ==12345678910 then
---	resetmode()
---end
---if k == "z" and ModeOfGlitch == 12345678910 and skinmode == false then
---	VANILLA()
---elseif k == "z" and ModeOfGlitch == 12345678910 and skinmode and skinname == "Vanilla" then
---	resetskin()
---elseif k == "x" and ModeOfGlitch == 12345678910 and skinmode == false then
---	Chocola()
---elseif k == "x" and ModeOfGlitch == 12345678910 and skinmode and skinname == "Chocola" then
---	resetskin()
---end
+if k =="up" and ModeOfGlitch ~= 34 then
+	if Player.Name == "plytalent" or Player.Name == "dizzyfreddbear" then
+	DIZZYFREDDBEAR()
+	else
+	resetmode()
+	end
+elseif k =="up" and ModeOfGlitch == 34 then
+	resetmode()
+end
+if k == "down" and ModeOfGlitch ~=12345678910 then
+SKINMODE()
+elseif k == "down" and ModeOfGlitch ==12345678910 then
+	resetmode()
+end
+if k == "z" and ModeOfGlitch == 12345678910 and skinmode == false then
+	VANILLA()
+elseif k == "z" and ModeOfGlitch == 12345678910 and skinmode and skinname == "Vanilla" then
+	resetskin()
+elseif k == "x" and ModeOfGlitch == 12345678910 and skinmode == false then
+	Chocola()
+elseif k == "x" and ModeOfGlitch == 12345678910 and skinmode and skinname == "Chocola" then
+	resetskin()
+end
 if k == "y" and attack ==false and ModeOfGlitch == 333 and ModeOfGlitch ~= 180225471 then
 LOVE()
 elseif k == "g" and attack == false and ModeOfGlitch == 180225471 and ModeOfGlitch ~= 333 then
@@ -17253,6 +17971,15 @@ DeStRuCtIoN()
 elseif k == "b" and attack == false and ModeOfGlitch == 666 then
 resetmode()
 end
+if k == "h" and ModeOfGlitch == 6 and  not hatintime then
+	kan:Pause()
+	hatintime = true
+elseif k == "h" and ModeOfGlitch == 6 and  hatintime then
+	kan:Resume()
+	workspace:FindFirstChild("music"):Pause()
+	hatintime = false
+end
+--workspace.vis_test.Sound
 if k == "l" and toggleTag == false then
 toggleTag = true
 text.TextTransparency = 0
@@ -17315,6 +18042,14 @@ elseif k == "x" and ModeOfGlitch == 34 then
 if targetted then
 targetted.Parent = nil
 end
+elseif k == "v" and ModeOfGlitch == 34 then
+LockOn()
+game:GetService("RunService").Heartbeat:wait()
+if targetted then
+targetted.Parent = nil
+end
+elseif k == "b" and ModeOfGlitch == 34 then
+	shield_ban() 
 elseif k=="c"and attack == false then
 targetted=nil
 elseif k == "x" and attack == false and ModeOfGlitch == 1000000 then
@@ -17433,12 +18168,12 @@ mouse.KeyUp:connect(function(k)
 	if k == "b" and ModeOfGlitch == 15 then
 		HoldingB = false
 	end
---	if k == "k" then
---		y = 0
---	end
---	if k == "j" then
---		y =0
---	end
+	if k == "k" then
+		y = 0
+	end
+	if k == "j" then
+		y =0
+	end
 end)
 coroutine.resume(coroutine.create(function()
 while true do
@@ -17472,14 +18207,14 @@ if ModeOfGlitch == 12345678987654321 or ModeOfGlitch == 666 then
 sphereMK(5,math.random(1,2),"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,MAINRUINCOLOR,0)
 end
 if ModeOfGlitch == 34 then
-	sphereMKColor3(5,2,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
-	sphereMKColor3(5,1.75,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
-	sphereMKColor3(5,1.5,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
-	sphereMKColor3(5,1.25,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
-	sphereMKColor3(5,1,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
-	sphereMKColor3(5,0.75,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
-	sphereMKColor3(5,0.5,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
-	sphereMKColor3(5,0.25,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
+--	sphereMKColor3HIT(5,2,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
+--	sphereMKColor3HIT(5,1.75,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
+--	sphereMKColor3HIT(5,1.5,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
+--	sphereMKColor3HIT(5,1.25,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
+	sphereMKColor3HIT(5,1,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
+	sphereMKColor3HIT(5,0.75,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
+	sphereMKColor3HIT(5,0.5,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
+	sphereMKColor3HIT(5,0.25,"Add",root.CFrame*CFrame.new(math.random(-75,75),-25,math.random(-75,75))*CFrame.Angles(math.rad(90 + math.random(-25,25)),math.rad(math.random(-25,25)),0),1,1,50,-0.01,Color3.new(r/255,g/255,b/255),0)
 end
 end
 end))
@@ -17777,6 +18512,7 @@ idle=idle+1
 else
 idle=0
 end
+
 if idle>=500 then
 if attack==false then
 --Sheath()
@@ -17928,5 +18664,4 @@ end
 end
 end
 end
-
 end)
