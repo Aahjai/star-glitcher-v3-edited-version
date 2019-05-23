@@ -10037,14 +10037,14 @@ end)
 --	print(keyst)
 --end
 function ERRORRIPPER()
-Sound = owner.Character["VIS"]
+--[[Sound = owner.Character["VIS"]
 print("Active error")
 VIS = false
 kan:Play()
 if Sound.IsPaused == false then
 Sound:Pause()
 end
-visdisplay.Transparency = 1
+visdisplay.Transparency = 1]]
 scripterrorripper = true
 ModeOfGlitch = 333
 RecolorTextAndRename("ERROR RIPPER",Color3.new(0,0,0),Color3.new(0.35,0,1))
@@ -10209,7 +10209,7 @@ end
 end
 VIS = false
 function VISMODE()
-ModeOfGlitch = 18022547
+--[[ModeOfGlitch = 18022547
 VIS = true
 kan:Pause()
 RecolorTextAndRename("SOMETHING",Color3.new(255,255,255),Color3.new(255,255,255))
@@ -10265,7 +10265,8 @@ v.BrickColor = BrickColor.new("White")
 v.Material = "Neon"
 end
 end
-print("END VIS MODE")
+print("END VIS MODE")]]
+print("VIS NOT WORK")
 end
 function LIGHTMAGIC()
 ModeOfGlitch = 15
