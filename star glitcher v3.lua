@@ -394,7 +394,8 @@ targetted = person
 for i = 0, 2, 0.1 do
 swait()
 end
-end))
+end
+end)
 dd()
 end
 --Chirsty char
